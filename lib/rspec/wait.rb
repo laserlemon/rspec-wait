@@ -1,5 +1,4 @@
-module Rspec
+module RSpec
   module Wait
-    # Your code goes here...
   end
 end

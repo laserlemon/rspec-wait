@@ -1,4 +1,4 @@
-# Rspec::Wait
+# RSpec::Wait
 
 TODO: Write a gem description
 
