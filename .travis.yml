@@ -8,8 +8,12 @@ gemfile:
   - gemfiles/rspec_2_14.gemfile
   - gemfiles/rspec_3_0.gemfile
 language: ruby
+matrix:
+  allow_failures:
+    - rvm: ruby-head
 rvm:
   - 1.9.3
   - 2.0.0
   - "2.1"
+  - ruby-head
 script: rspec
