@@ -6,6 +6,7 @@ gemfile:
   - gemfiles/rspec_2_12.gemfile
   - gemfiles/rspec_2_13.gemfile
   - gemfiles/rspec_2_14.gemfile
+  - gemfiles/rspec_3_0.gemfile
 language: ruby
 rvm:
   - 1.9.3
