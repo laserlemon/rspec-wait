@@ -26,8 +26,8 @@ RSpec::Wait will keep trying until your assertion passes or times out.
 
 ### Example
 
-RSpec::Wait's assertions are drop-in replacements for RSpec's `expect`
-assertions.
+RSpec::Wait's `wait_for` assertions are drop-in replacements for RSpec's
+`expect` assertions.
 
 ```ruby
 describe Ticker do
