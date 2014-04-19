@@ -30,27 +30,29 @@ RSpec::Wait's assertions are drop-in replacements for RSpec's `expect`
 assertions.
 
 ```ruby
-describe Stopwatch do
-  subject(:stopwatch) { Stopwatch.new }
+describe Ticker do
+  subject(:ticker) { Ticker.new("foo") }
 
   describe "#start" do
     before do
-      stopwatch.start
+      ticker.start
     end
 
-    it "starts at 0" do
-      expect(stopwatch.seconds).to eq(0)
+    it "starts a blank tape" do
+      expect(ticker.tape).to eq("")
     end
 
-    it "counts to 3" do
-      wait_for(stopwatch.seconds).to eq(3)
+    it "writes the message one letter at a time" do
+      wait_for(ticker.tape).to eq("··-·")
+      wait_for(ticker.tape).to eq("··-· ---")
+      wait_for(ticker.tape).to eq("··-· --- ---")
     end
   end
 end
 ```
 
-This can be especially useful for testing user interactions containing tricky
-timing elements.
+This can be especially useful for testing user interfaces containing tricky
+timing elements like JavaScript interactions or remote requests.
 
 ```ruby
 feature "User Login" do
