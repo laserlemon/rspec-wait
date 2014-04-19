@@ -87,7 +87,7 @@ describe "wait_for" do
       }.to raise_error(RuntimeError)
     end
 
-    it "respects the not_to alias" do
+    it "respects the to_not alias" do
       expect {
         wait_for(progress).to_not eq("..")
       }.not_to raise_error
