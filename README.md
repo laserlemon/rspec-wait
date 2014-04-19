@@ -51,8 +51,8 @@ describe Ticker do
 end
 ```
 
-This can be especially useful for testing user interfaces containing tricky
-timing elements like JavaScript interactions or remote requests.
+This can be especially useful for testing user interfaces with tricky timing
+elements like JavaScript interactions or remote requests.
 
 ```ruby
 feature "User Login" do
@@ -70,6 +70,11 @@ feature "User Login" do
   end
 end
 ```
+
+### Matchers
+
+RSpec::Wait ties into RSpec's internals so it can take full advantage of any
+matcher that you would use with RSpec's own `expect` method.
 
 ## Who wrote RSpec::Wait?
 
