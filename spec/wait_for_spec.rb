@@ -42,6 +42,12 @@ describe "wait_for" do
         wait_for { sleep 11; progress }.to eq("..")
       }.to raise_error(RSpec::Wait::TimeoutError)
     end
+
+    it "raises an error occuring in the block" do
+      expect {
+        wait_for { raise RuntimeError }.to eq("..")
+      }.to raise_error(RuntimeError)
+    end
   end
 
   context "not_to" do
@@ -73,6 +79,12 @@ describe "wait_for" do
       expect {
         wait_for { sleep 11; progress }.not_to eq("..")
       }.to raise_error(RSpec::Wait::TimeoutError)
+    end
+
+    it "raises an error occuring in the block" do
+      expect {
+        wait_for { raise RuntimeError }.not_to eq("")
+      }.to raise_error(RuntimeError)
     end
 
     it "respects the not_to alias" do
