@@ -27,7 +27,7 @@ describe "wait_for" do
 
     it "accepts a block" do
       expect {
-        wait_for { progress }.to eq(".")
+        wait_for { progress.dup }.to eq(".")
       }.not_to raise_error
     end
 
@@ -65,7 +65,7 @@ describe "wait_for" do
 
     it "accepts a block" do
       expect {
-        wait_for { progress }.not_to eq("")
+        wait_for { progress.dup }.not_to eq("")
       }.not_to raise_error
     end
 
