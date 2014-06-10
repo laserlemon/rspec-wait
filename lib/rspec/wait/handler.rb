@@ -9,13 +9,14 @@ module RSpec
       TIMEOUT = 10
       DELAY = 0.1
 
-      def handle_matcher(actual, *args, &block)
+      def handle_matcher(target, *args, &block)
         failure = nil
 
         Timeout.timeout(TIMEOUT) do
           loop do
             begin
-              super(actual.call, *args, &block)
+              actual = target.respond_to?(:call) ? target.call : target
+              super(actual, *args, &block)
               break
             rescue RSpec::Expectations::ExpectationNotMetError => failure
               sleep DELAY

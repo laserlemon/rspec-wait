@@ -55,10 +55,10 @@ describe "wait_for" do
       }.to raise_error(ArgumentError)
     end
 
-    it "accepts only a block" do
+    it "accepts a value rather than a block" do
       expect {
         wait_for(progress).to eq(".")
-      }.to raise_error(ArgumentError)
+      }.not_to raise_error
     end
   end
 
@@ -111,10 +111,10 @@ describe "wait_for" do
       }.to raise_error(ArgumentError)
     end
 
-    it "accepts only a block" do
+    it "accepts a value rather than a block" do
       expect {
         wait_for(progress).not_to eq("..")
-      }.to raise_error(ArgumentError)
+      }.not_to raise_error
     end
   end
 end
