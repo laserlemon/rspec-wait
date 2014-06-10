@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "rspec-wait"
-  spec.version = "0.0.1"
+  spec.version = "0.0.2"
 
   spec.author      = "Steve Richert"
   spec.email       = "steve.richert@gmail.com"
