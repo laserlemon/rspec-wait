@@ -58,7 +58,7 @@ elements like JavaScript interactions or remote requests.
 
 ```ruby
 feature "User Login" do
-  let!(:user) { create(:user, name: "John Doe", email: "john@example.com", password: "secret") }
+  let!(:user) { create(:user, email: "john@example.com", password: "secret") }
 
   scenario "A user can log in successfully" do
     visit new_session_path
@@ -68,7 +68,7 @@ feature "User Login" do
     click_button "Log In"
 
     wait_for { current_path }.to eq(account_path)
-    expect(page).to have_content("John Doe")
+    expect(page).to have_content("Welcome back!")
   end
 end
 ```
