@@ -2,11 +2,11 @@
 
 Wait for conditions in RSpec
 
-[![Gem Version](https://img.shields.io/gem/v/rspec-wait.svg)](http://badge.fury.io/rb/rspec-wait)
-[![Build Status](https://img.shields.io/travis/laserlemon/rspec-wait/master.svg)](https://travis-ci.org/laserlemon/rspec-wait)
-[![Code Climate](https://img.shields.io/codeclimate/github/laserlemon/rspec-wait.svg)](https://codeclimate.com/github/laserlemon/rspec-wait)
-[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/laserlemon/rspec-wait.svg)](https://codeclimate.com/github/laserlemon/rspec-wait)
-[![Dependency Status](https://img.shields.io/gemnasium/laserlemon/rspec-wait.svg)](https://gemnasium.com/laserlemon/rspec-wait)
+[![Gem Version](https://img.shields.io/gem/v/rspec-wait.svg?style=flat)](https://rubygems.org/gems/rspec-wait)
+[![Build Status](https://img.shields.io/travis/laserlemon/rspec-wait/master.svg?style=flat)](https://travis-ci.org/laserlemon/rspec-wait)
+[![Code Climate](https://img.shields.io/codeclimate/github/laserlemon/rspec-wait.svg?style=flat)](https://codeclimate.com/github/laserlemon/rspec-wait)
+[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/laserlemon/rspec-wait.svg?style=flat)](https://codeclimate.com/github/laserlemon/rspec-wait)
+[![Dependency Status](https://img.shields.io/gemnasium/laserlemon/rspec-wait.svg?style=flat)](https://gemnasium.com/laserlemon/rspec-wait)
 
 ## Why does RSpec::Wait exist?
 
