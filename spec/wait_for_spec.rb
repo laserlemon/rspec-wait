@@ -48,6 +48,12 @@ describe "wait_for" do
         wait_for { raise RuntimeError }.to eq("..")
       }.to raise_error(RuntimeError)
     end
+
+    it "prevents operator matchers" do
+      expect {
+        wait_for { progress }.to == "."
+      }.to raise_error(ArgumentError)
+    end
   end
 
   context "not_to" do
@@ -91,6 +97,12 @@ describe "wait_for" do
       expect {
         wait_for { progress }.to_not eq("..")
       }.not_to raise_error
+    end
+
+    it "prevents operator matchers" do
+      expect {
+        wait_for { progress }.not_to == ".."
+      }.to raise_error(ArgumentError)
     end
   end
 end
