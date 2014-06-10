@@ -6,11 +6,9 @@ require "rspec/wait/target"
 
 module RSpec
   module Wait
-    # From: https://github.com/rspec/rspec-expectations/blob/v2.14.5/lib/rspec/expectations/syntax.rb#L83-L87
-    def wait_for(*target, &target_block)
-      target << target_block if block_given?
-      raise ArgumentError.new("You must pass an argument or a block to #wait_for but not both.") unless target.size == 1
-      Target.new(target.first)
+    # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/syntax.rb#L72-L74
+    def wait_for(&block)
+      Target.new(block)
     end
   end
 end

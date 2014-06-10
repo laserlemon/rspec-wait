@@ -9,16 +9,13 @@ module RSpec
       TIMEOUT = 10
       DELAY = 0.1
 
-      # From: https://github.com/rspec/rspec-expectations/blob/v2.14.5/lib/rspec/expectations/handler.rb#L16-L64
-      def handle_matcher(actual, *)
+      def handle_matcher(actual, *args, &block)
         failure = nil
 
         Timeout.timeout(TIMEOUT) do
           loop do
-            actual = actual.call if actual.respond_to?(:call)
-
             begin
-              super
+              super(actual.call, *args, &block)
               break
             rescue RSpec::Expectations::ExpectationNotMetError => failure
               sleep DELAY
@@ -31,10 +28,12 @@ module RSpec
       end
     end
 
+    # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/handler.rb#L44-L63
     class PositiveHandler < RSpec::Expectations::PositiveExpectationHandler
       extend Handler
     end
 
+    # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/handler.rb#L66-L93
     class NegativeHandler < RSpec::Expectations::NegativeExpectationHandler
       extend Handler
     end
