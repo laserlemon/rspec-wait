@@ -3,6 +3,12 @@ before_install:
 branches:
   only:
     - master
+env:
+  global:
+    - secure: | # CODECLIMATE_REPO_TOKEN
+        lK3tYDk/63jRamEfGKbC27mPAoV7XsebCurx6doeisv1r4926lyPY4B9ZoSu
+        OeVmjXQWHX9U7IgPH1C+zoIh1wVHVA8h5FVuqlGUMlA6IJi2xaI+ChEo3WeD
+        FRlk1Q5fGhgp1mt59sMn3GZZ/mv31v+sd9iYC3AVIM0KrlMGGZQ=
 gemfile:
   - gemfiles/rspec_2_11.gemfile
   - gemfiles/rspec_2_12.gemfile
@@ -13,17 +19,8 @@ language: ruby
 matrix:
   allow_failures:
     - rvm: ruby-head
-  include:
-    - env:
-        secure: | # CODECLIMATE_REPO_TOKEN
-          lK3tYDk/63jRamEfGKbC27mPAoV7XsebCurx6doeisv1r4926lyPY4B9ZoSu
-          OeVmjXQWHX9U7IgPH1C+zoIh1wVHVA8h5FVuqlGUMlA6IJi2xaI+ChEo3WeD
-          FRlk1Q5fGhgp1mt59sMn3GZZ/mv31v+sd9iYC3AVIM0KrlMGGZQ=
-      gemfile: Gemfile
-      rvm: "2.1"
 rvm:
   - 1.9.3
-  - 2.0.0
+  - "2.0"
   - "2.1"
   - ruby-head
-script: bundle exec rspec
