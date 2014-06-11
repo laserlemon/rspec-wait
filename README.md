@@ -27,9 +27,10 @@ RSpec::Wait will keep trying until your assertion passes or times out.
 ### Example
 
 RSpec::Wait's `wait_for` assertions are nearly drop-in replacements for RSpec's
-`expect` assertions. The major difference is that the `wait_for` method always
-accepts a block because it may evaluate the content of that block multiple times
-while waiting.
+`expect` assertions. The major difference is that the `wait_for` method only
+works with non-block matchers. However, `wait_for` will still accept a block
+because it may need to evaluate the content of that block multiple times while
+waiting.
 
 ```ruby
 describe Ticker do
@@ -41,13 +42,13 @@ describe Ticker do
     end
 
     it "starts a blank tape" do
-      expect { ticker.tape }.to eq("")
+      expect(ticker.tape).to eq("")
     end
 
     it "writes the message one letter at a time" do
-      wait_for { ticker.tape }.to eq("··-·")
-      wait_for { ticker.tape }.to eq("··-· ---")
-      wait_for { ticker.tape }.to eq("··-· --- ---")
+      wait_for(ticker.tape).to eq("··-·")
+      wait_for(ticker.tape).to eq("··-· ---")
+      wait_for(ticker.tape).to eq("··-· --- ---")
     end
   end
 end
@@ -76,7 +77,7 @@ end
 ### Matchers
 
 RSpec::Wait ties into RSpec's internals so it can take full advantage of any
-matcher that you would use with RSpec's own `expect` method.
+non-block matcher that you would use with RSpec's own `expect` method.
 
 ## Who wrote RSpec::Wait?
 
