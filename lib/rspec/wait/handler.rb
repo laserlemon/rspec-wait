@@ -6,8 +6,13 @@ require "rspec/wait/error"
 module RSpec
   module Wait
     module Handler
-      TIMEOUT = 10
+   	  if defined?(RSpec.configuration.wait_timeout) then
+		TIMEOUT=RSpec.configuration.wait_timeout
+	  else
+		TIMEOUT=10
+	  end
       DELAY = 0.1
+	  
 
       def handle_matcher(target, *args, &block)
         failure = nil
