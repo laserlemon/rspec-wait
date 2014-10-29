@@ -15,6 +15,7 @@ gemfile:
   - gemfiles/rspec_2_13.gemfile
   - gemfiles/rspec_2_14.gemfile
   - gemfiles/rspec_3_0.gemfile
+  - gemfiles/rspec_3_1.gemfile
 language: ruby
 matrix:
   allow_failures:
