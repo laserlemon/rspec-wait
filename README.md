@@ -79,6 +79,18 @@ end
 RSpec::Wait ties into RSpec's internals so it can take full advantage of any
 non-block matcher that you would use with RSpec's own `expect` method.
 
+### Configure wait timeout
+
+The timeout before failing can be changed to fit your needs by adding a custom settings in ~/.rspec, .rspec, .rspec-local.
+
+```ruby
+#.rspec
+RSpec.configure do |c|
+	c.add_setting :wait_timeout
+	c.wait_timeout=30 # default is 10 sec
+end
+```
+
 ## Who wrote RSpec::Wait?
 
 My name is Steve Richert and I wrote RSpec::Wait in April, 2014 with the support
