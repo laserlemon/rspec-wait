@@ -43,6 +43,25 @@ describe "wait_for" do
       }.to raise_error(RSpec::Wait::TimeoutError)
     end
 
+    it "respects a timeout specified in configuration" do
+      original_timeout = RSpec.configuration.wait_timeout
+      RSpec.configuration.wait_timeout = 3
+
+      begin
+        expect {
+          wait_for { sleep 4; progress }.to eq("..")
+        }.to raise_error(RSpec::Wait::TimeoutError)
+      ensure
+        RSpec.configuration.wait_timeout = original_timeout
+      end
+    end
+
+    it "respects a timeout specified in options", wait: { timeout: 3 } do
+      expect {
+        wait_for { sleep 4; progress }.to eq("..")
+      }.to raise_error(RSpec::Wait::TimeoutError)
+    end
+
     it "raises an error occuring in the block" do
       expect {
         wait_for { raise RuntimeError }.to eq("..")
@@ -90,6 +109,25 @@ describe "wait_for" do
     it "times out if the block never finishes" do
       expect {
         wait_for { sleep 11; progress }.not_to eq("..")
+      }.to raise_error(RSpec::Wait::TimeoutError)
+    end
+
+    it "respects a timeout specified in configuration" do
+      original_timeout = RSpec.configuration.wait_timeout
+      RSpec.configuration.wait_timeout = 3
+
+      begin
+        expect {
+          wait_for { sleep 4; progress }.not_to eq("..")
+        }.to raise_error(RSpec::Wait::TimeoutError)
+      ensure
+        RSpec.configuration.wait_timeout = original_timeout
+      end
+    end
+
+    it "respects a timeout specified in options", wait: { timeout: 3 } do
+      expect {
+        wait_for { sleep 4; progress }.not_to eq("..")
       }.to raise_error(RSpec::Wait::TimeoutError)
     end
 
