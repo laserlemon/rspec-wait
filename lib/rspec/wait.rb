@@ -3,12 +3,20 @@ require "rspec"
 require "rspec/wait/error"
 require "rspec/wait/handler"
 require "rspec/wait/target"
+require "rspec/wait/proxy"
 
 module RSpec
   module Wait
+    module_function
+
     # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/syntax.rb#L72-L74
     def wait_for(value = Target::UndefinedValue, &block)
       Target.for(value, block)
+    end
+
+    def wait(timeout = nil, options = {})
+      options[:timeout] = timeout
+      Proxy.new(options)
     end
 
     def with_wait(options = {})
