@@ -19,7 +19,7 @@ module RSpec
       Proxy.new(options)
     end
 
-    def with_wait(options = {})
+    def with_wait(options)
       original_timeout = RSpec.configuration.wait_timeout
       original_delay = RSpec.configuration.wait_delay
 
