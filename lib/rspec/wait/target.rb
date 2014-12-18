@@ -21,8 +21,7 @@ module RSpec
           new(value)
         end
       end
-      #
-      #
+
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L53-L54
       def to(matcher = nil, message = nil, &block)
         prevent_operator_matchers(:to, matcher) unless matcher
