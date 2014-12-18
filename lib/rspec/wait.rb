@@ -15,4 +15,7 @@ end
 
 RSpec.configure do |config|
   config.include(RSpec::Wait)
+
+  config.add_setting(:wait_timeout, default: 10)
+  config.add_setting(:wait_delay, default: 0.1)
 end
