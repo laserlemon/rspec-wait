@@ -1,6 +1,3 @@
-require "rspec/wait"
-require "rspec/wait/target"
-
 module RSpec
   module Wait
     class Proxy

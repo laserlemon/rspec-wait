@@ -1,7 +1,4 @@
-require "rspec"
 require "timeout"
-
-require "rspec/wait/error"
 
 module RSpec
   module Wait

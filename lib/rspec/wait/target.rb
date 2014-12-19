@@ -1,8 +1,3 @@
-require "rspec"
-
-require "rspec/wait"
-require "rspec/wait/handler"
-
 module RSpec
   module Wait
     class Target < RSpec::Expectations::ExpectationTarget
