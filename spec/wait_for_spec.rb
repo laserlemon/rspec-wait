@@ -1,5 +1,3 @@
-require "spec_helper"
-
 describe "wait_for" do
   let!(:progress) { "" }
 
