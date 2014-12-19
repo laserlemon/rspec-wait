@@ -1,4 +1,4 @@
-## 0.0.4 / Unreleased
+## 0.0.4 / 2014-12-18
 
 * [FEATURE] Make RSpec::Wait's timeout and delay values configurable
 * [FEATURE] Add the wait(3.seconds).for { something }.to(happen) syntax sugar
