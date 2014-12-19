@@ -79,6 +79,54 @@ end
 RSpec::Wait ties into RSpec's internals so it can take full advantage of any
 non-block matcher that you would use with RSpec's own `expect` method.
 
+### Timeout
+
+By default, RSpec::Wait will wait up to 10 seconds for an assertion to pass.
+That timeout value is configurable in three ways:
+
+#### RSpec Configuration
+
+```ruby
+RSpec.configure do |config|
+  config.wait_timeout = 3 # seconds
+end
+```
+
+#### RSpec Metadata
+
+The timeout can also be specified via options added to a spec's or context's
+`:wait` metadata:
+
+```ruby
+scenario "A user can log in successfully", wait: { timeout: 3 } do
+  visit new_session_path
+
+  fill_in "Email", with: "john@example.com"
+  fill_in "Password", with: "secret"
+  click_button "Log In"
+
+  wait_for { current_path }.to eq(account_path)
+  expect(page).to have_content("Welcome back!")
+end
+```
+
+#### The `wait` Method
+
+On a per-assertion basis, the timeout value can be passed to the `wait` method.
+
+```ruby
+scenario "A user can log in successfully" do
+  visit new_session_path
+
+  fill_in "Email", with: "john@example.com"
+  fill_in "Password", with: "secret"
+  click_button "Log In"
+
+  wait(3.seconds).for { current_path }.to eq(account_path)
+  expect(page).to have_content("Welcome back!")
+end
+```
+
 ## Who wrote RSpec::Wait?
 
 My name is Steve Richert and I wrote RSpec::Wait in April, 2014 with the support
