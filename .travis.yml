@@ -1,8 +1,9 @@
 before_install:
-  - gem update bundler
+  - gem update bundler rake
 branches:
   only:
     - master
+cache: bundler
 env:
   global:
     - secure: | # CODECLIMATE_REPO_TOKEN
@@ -16,6 +17,7 @@ gemfile:
   - gemfiles/rspec_2_14.gemfile
   - gemfiles/rspec_3_0.gemfile
   - gemfiles/rspec_3_1.gemfile
+  - gemfiles/rspec_3_2.gemfile
 language: ruby
 matrix:
   allow_failures:
@@ -24,4 +26,6 @@ rvm:
   - 1.9.3
   - "2.0"
   - "2.1"
+  - "2.2"
   - ruby-head
+sudo: false
