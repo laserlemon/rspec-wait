@@ -36,6 +36,8 @@ module RSpec
         with_wait { NegativeHandler.handle_matcher(@target, matcher, message, &block) }
       end
 
+      alias_method :to_not, :not_to
+
       private
 
       def with_wait
