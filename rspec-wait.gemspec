@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "rspec-wait"
-  spec.version = "0.0.5"
+  spec.version = "0.0.6"
 
   spec.author      = "Steve Richert"
   spec.email       = "steve.richert@gmail.com"
@@ -16,6 +16,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rspec", ">= 2.11", "< 3.3"
 
-  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.4"
 end

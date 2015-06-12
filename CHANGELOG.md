@@ -1,3 +1,7 @@
+## 0.0.6 / 2015-06-12
+
+* [BUGFIX] Fix the `to_not` alias in cases where the condition is not met
+
 ## 0.0.5 / 2015-01-04
 
 * [ENHANCEMENT] Add support for RSpec 3.2
