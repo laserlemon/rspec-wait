@@ -148,10 +148,16 @@ describe "wait" do
         }.to raise_error(RuntimeError)
       end
 
-      it "respects the to_not alias" do
+      it "respects the to_not alias when expectation is met" do
         expect {
-          wait.for { progress }.to_not eq("..")
+          wait(1).for { true }.to_not eq(false)
         }.not_to raise_error
+      end
+
+      it "respects the to_not alias when expectation is not met" do
+        expect {
+          wait(1).for { true }.to_not eq(true)
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
 
       it "prevents operator matchers" do
