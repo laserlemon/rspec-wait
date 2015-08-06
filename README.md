@@ -127,6 +127,15 @@ scenario "A user can log in successfully" do
 end
 ```
 
+### Use with Cucumber
+
+To enable RSpec::Wait in Cucumber step definitions, add the following to your `features/support/env.rb` file:
+
+```ruby
+require 'rspec/wait'
+World(RSpec::Wait)
+```
+
 ## Who wrote RSpec::Wait?
 
 My name is Steve Richert and I wrote RSpec::Wait in April, 2014 with the support
