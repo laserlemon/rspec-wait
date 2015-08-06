@@ -129,10 +129,12 @@ end
 
 ### Use with Cucumber
 
-To enable RSpec::Wait in Cucumber step definitions, add the following to your `features/support/env.rb` file:
+To enable RSpec::Wait in your Cucumber step definitions, add the following to
+`features/support/env.rb`:
 
 ```ruby
-require 'rspec/wait'
+require "rspec/wait"
+
 World(RSpec::Wait)
 ```
 
