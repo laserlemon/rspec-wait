@@ -1,6 +1,6 @@
-## 0.0.8 / 2015-11-13
+## 0.0.8 / 2015-11-14
 
-* [ENHANCEMENT] Add support for RSpec 3.3
+* [ENHANCEMENT] Add support for RSpec 3.4
 
 ## 0.0.7 / 2015-06-16
 
