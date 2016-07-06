@@ -20,6 +20,7 @@ gemfile:
   - gemfiles/rspec_3_2.gemfile
   - gemfiles/rspec_3_3.gemfile
   - gemfiles/rspec_3_4.gemfile
+  - gemfiles/rspec_3_6.gemfile
 language: ruby
 matrix:
   allow_failures:
@@ -29,5 +30,6 @@ rvm:
   - "2.0"
   - "2.1"
   - "2.2"
+  - "2.3"
   - ruby-head
 sudo: false
