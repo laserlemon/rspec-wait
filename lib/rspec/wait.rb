@@ -19,8 +19,8 @@ module RSpec
     end
 
     def with_wait(options)
-      original_timeout = RSpec.configuration.wait_timeout
-      original_delay = RSpec.configuration.wait_delay
+      original_timeout = RSpec.configuration.send(:wait_timeout)
+      original_delay = RSpec.configuration.send(:wait_delay)
 
       RSpec.configuration.wait_timeout = options[:timeout] if options[:timeout]
       RSpec.configuration.wait_delay = options[:delay] if options[:delay]

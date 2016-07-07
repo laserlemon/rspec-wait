@@ -42,7 +42,7 @@ describe "wait_for" do
     end
 
     it "respects a timeout specified in configuration" do
-      original_timeout = RSpec.configuration.wait_timeout
+      original_timeout = RSpec.configuration.send(:wait_timeout)
       RSpec.configuration.wait_timeout = 3
 
       begin
@@ -111,7 +111,7 @@ describe "wait_for" do
     end
 
     it "respects a timeout specified in configuration" do
-      original_timeout = RSpec.configuration.wait_timeout
+      original_timeout = RSpec.configuration.send(:wait_timeout)
       RSpec.configuration.wait_timeout = 3
 
       begin
