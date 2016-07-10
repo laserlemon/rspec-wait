@@ -11,10 +11,6 @@ env:
         OeVmjXQWHX9U7IgPH1C+zoIh1wVHVA8h5FVuqlGUMlA6IJi2xaI+ChEo3WeD
         FRlk1Q5fGhgp1mt59sMn3GZZ/mv31v+sd9iYC3AVIM0KrlMGGZQ=
 gemfile:
-  - gemfiles/rspec_2_11.gemfile
-  - gemfiles/rspec_2_12.gemfile
-  - gemfiles/rspec_2_13.gemfile
-  - gemfiles/rspec_2_14.gemfile
   - gemfiles/rspec_3_0.gemfile
   - gemfiles/rspec_3_1.gemfile
   - gemfiles/rspec_3_2.gemfile
