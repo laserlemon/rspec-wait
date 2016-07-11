@@ -11,23 +11,19 @@ env:
         OeVmjXQWHX9U7IgPH1C+zoIh1wVHVA8h5FVuqlGUMlA6IJi2xaI+ChEo3WeD
         FRlk1Q5fGhgp1mt59sMn3GZZ/mv31v+sd9iYC3AVIM0KrlMGGZQ=
 gemfile:
-  - gemfiles/rspec_2_11.gemfile
-  - gemfiles/rspec_2_12.gemfile
-  - gemfiles/rspec_2_13.gemfile
-  - gemfiles/rspec_2_14.gemfile
   - gemfiles/rspec_3_0.gemfile
   - gemfiles/rspec_3_1.gemfile
   - gemfiles/rspec_3_2.gemfile
   - gemfiles/rspec_3_3.gemfile
   - gemfiles/rspec_3_4.gemfile
+  - gemfiles/rspec_3_5.gemfile
 language: ruby
 matrix:
   allow_failures:
     - rvm: ruby-head
 rvm:
-  - 1.9.3
-  - "2.0"
-  - "2.1"
-  - "2.2"
+  - 2.1.10
+  - 2.2.5
+  - 2.3.1
   - ruby-head
 sudo: false
