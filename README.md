@@ -126,6 +126,8 @@ scenario "A user can log in successfully" do
   expect(page).to have_content("Welcome back!")
 end
 ```
+### Use With Spring
+To enable Rspec::wait with Spring, no additional steps are needed. Just be sure to run `spring stop` after you `bundle install` to pick up the changes. 
 
 ### Use with Cucumber
 
