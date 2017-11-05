@@ -3,6 +3,7 @@ require "rspec/wait/error"
 require "rspec/wait/handler"
 require "rspec/wait/proxy"
 require "rspec/wait/target"
+require "rspec/wait/version"
 
 module RSpec
   module Wait

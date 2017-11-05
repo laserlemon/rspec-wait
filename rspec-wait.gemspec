@@ -1,13 +1,16 @@
-# encoding: utf-8
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "rspec/wait/version"
 
 Gem::Specification.new do |spec|
   spec.name    = "rspec-wait"
-  spec.version = "0.0.9"
+  spec.version = RSpec::Wait.version
 
-  spec.author      = "Steve Richert"
-  spec.email       = "steve.richert@gmail.com"
+  spec.author = "Steve Richert"
+  spec.email  = "steve.richert@gmail.com"
+
   spec.summary     = "Wait for conditions in RSpec"
-  spec.description = spec.summary
+  spec.description = "RSpec::Wait enables time-resilient expectations in your RSpec test suite."
   spec.homepage    = "https://github.com/laserlemon/rspec-wait"
   spec.license     = "MIT"
 
