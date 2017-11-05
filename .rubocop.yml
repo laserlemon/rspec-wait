@@ -19,3 +19,5 @@ Style/BlockDelimiters:
     - let
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+Style/SymbolArray:
+  EnforcedStyle: brackets
