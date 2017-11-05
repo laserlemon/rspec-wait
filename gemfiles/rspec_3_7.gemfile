@@ -5,5 +5,5 @@ gemspec path: ".."
 gem "rspec", "~> 3.7.0"
 
 group :test do
-  gem "codeclimate-test-reporter"
+  gem "codeclimate-test-reporter", require: false
 end
