@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email  = "steve.richert@gmail.com"
 
   spec.summary     = "Wait for conditions in RSpec"
-  spec.description = "RSpec::Wait enables time-resilient expectations in your RSpec test suite."
+  spec.description = "RSpec::Wait enables time-resilient expectations in your RSpec test suite." # rubocop:disable Metrics/LineLength
   spec.homepage    = "https://github.com/laserlemon/rspec-wait"
   spec.license     = "MIT"
 

@@ -1,5 +1,5 @@
 describe "wait_for" do
-  let!(:progress) { "" }
+  let(:progress) { "" }
 
   before do
     Thread.new do
@@ -37,7 +37,10 @@ describe "wait_for" do
 
     it "times out if the block never finishes" do
       expect {
-        wait_for { sleep 11; progress }.to eq("..")
+        wait_for {
+          sleep 11
+          progress
+        }.to eq("..")
       }.to raise_error(RSpec::Wait::TimeoutError)
     end
 
@@ -47,7 +50,10 @@ describe "wait_for" do
 
       begin
         expect {
-          wait_for { sleep 4; progress }.to eq("..")
+          wait_for {
+            sleep 4
+            progress
+          }.to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       ensure
         RSpec.configuration.wait_timeout = original_timeout
@@ -56,7 +62,10 @@ describe "wait_for" do
 
     it "respects a timeout specified in options", wait: { timeout: 3 } do
       expect {
-        wait_for { sleep 4; progress }.to eq("..")
+        wait_for {
+          sleep 4
+          progress
+        }.to eq("..")
       }.to raise_error(RSpec::Wait::TimeoutError)
     end
 
@@ -106,7 +115,10 @@ describe "wait_for" do
 
     it "times out if the block never finishes" do
       expect {
-        wait_for { sleep 11; progress }.not_to eq("..")
+        wait_for {
+          sleep 11
+          progress
+        }.not_to eq("..")
       }.to raise_error(RSpec::Wait::TimeoutError)
     end
 
@@ -116,7 +128,10 @@ describe "wait_for" do
 
       begin
         expect {
-          wait_for { sleep 4; progress }.not_to eq("..")
+          wait_for {
+            sleep 4
+            progress
+          }.not_to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       ensure
         RSpec.configuration.wait_timeout = original_timeout
@@ -125,7 +140,10 @@ describe "wait_for" do
 
     it "respects a timeout specified in options", wait: { timeout: 3 } do
       expect {
-        wait_for { sleep 4; progress }.not_to eq("..")
+        wait_for {
+          sleep 4
+          progress
+        }.not_to eq("..")
       }.to raise_error(RSpec::Wait::TimeoutError)
     end
 

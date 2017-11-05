@@ -1,0 +1,21 @@
+# This should always correspond to the earliest non-EOL Ruby version.
+AllCops:
+  TargetRubyVersion: 2.2
+
+# TODO: Re-enable this cop after TomDoc code deocumentation is added.
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - context
+    - describe
+Metrics/LineLength:
+  IgnoreCopDirectives: true
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
+  FunctionalMethods:
+    - expect
+    - let
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

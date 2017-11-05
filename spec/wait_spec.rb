@@ -1,5 +1,5 @@
 describe "wait" do
-  let!(:progress) { "" }
+  let(:progress) { "" }
 
   before do
     Thread.new do
@@ -38,7 +38,10 @@ describe "wait" do
 
       it "times out if the block never finishes" do
         expect {
-          wait.for { sleep 11; progress }.to eq("..")
+          wait.for {
+            sleep 11
+            progress
+          }.to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       end
 
@@ -48,7 +51,10 @@ describe "wait" do
 
         begin
           expect {
-            wait.for { sleep 4; progress }.to eq("..")
+            wait.for {
+              sleep 4
+              progress
+            }.to eq("..")
           }.to raise_error(RSpec::Wait::TimeoutError)
         ensure
           RSpec.configuration.wait_timeout = original_timeout
@@ -57,13 +63,19 @@ describe "wait" do
 
       it "respects a timeout specified in options", wait: { timeout: 3 } do
         expect {
-          wait.for { sleep 4; progress }.to eq("..")
+          wait.for {
+            sleep 4
+            progress
+          }.to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       end
 
       it "respects a timeout specified as an argument" do
         expect {
-          wait(3).for { sleep 4; progress }.to eq("..")
+          wait(3).for {
+            sleep 4
+            progress
+          }.to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       end
 
@@ -113,7 +125,10 @@ describe "wait" do
 
       it "times out if the block never finishes" do
         expect {
-          wait.for { sleep 11; progress }.not_to eq("..")
+          wait.for {
+            sleep 11
+            progress
+          }.not_to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       end
 
@@ -123,7 +138,10 @@ describe "wait" do
 
         begin
           expect {
-            wait.for { sleep 4; progress }.not_to eq("..")
+            wait.for {
+              sleep 4
+              progress
+            }.not_to eq("..")
           }.to raise_error(RSpec::Wait::TimeoutError)
         ensure
           RSpec.configuration.wait_timeout = original_timeout
@@ -132,13 +150,19 @@ describe "wait" do
 
       it "respects a timeout specified in options", wait: { timeout: 3 } do
         expect {
-          wait.for { sleep 4; progress }.not_to eq("..")
+          wait.for {
+            sleep 4
+            progress
+          }.not_to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       end
 
       it "respects a timeout specified as an argument" do
         expect {
-          wait(3).for { sleep 4; progress }.not_to eq("..")
+          wait(3).for {
+            sleep 4
+            progress
+          }.not_to eq("..")
         }.to raise_error(RSpec::Wait::TimeoutError)
       end
 

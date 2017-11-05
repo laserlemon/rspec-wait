@@ -41,7 +41,7 @@ RSpec.configure do |config|
   config.add_setting(:wait_delay, default: 0.1)
 
   config.around do |example|
-    if options = example.metadata[:wait]
+    if (options = example.metadata[:wait])
       with_wait(options) { example.run }
     else
       example.run
