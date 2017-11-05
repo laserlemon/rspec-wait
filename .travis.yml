@@ -10,6 +10,7 @@ branches:
 cache: bundler
 dist: trusty
 gemfile:
+  - Gemfile
   - gemfiles/rspec_3_0.gemfile
   - gemfiles/rspec_3_1.gemfile
   - gemfiles/rspec_3_2.gemfile
