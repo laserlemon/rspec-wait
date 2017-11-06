@@ -86,6 +86,18 @@ describe "wait_for" do
         wait_for(progress).to eq(".")
       }.not_to raise_error
     end
+
+    it "waits for block matchers when expectation is met" do
+      expect {
+        wait_for { raise RuntimeError }.to raise_error(RuntimeError)
+      }.not_to raise_error
+    end
+
+    it "waits for block matchers when expectation is not met" do
+      expect {
+        wait_for { progress }.to raise_error(RuntimeError)
+      }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
+    end
   end
 
   context "not_to" do
@@ -175,6 +187,18 @@ describe "wait_for" do
       expect {
         wait_for(progress).not_to eq("..")
       }.not_to raise_error
+    end
+
+    it "waits for block matchers when expectation is met" do
+      expect {
+        wait_for { progress }.not_to raise_error
+      }.not_to raise_error
+    end
+
+    it "waits for block matchers when expectation is not met" do
+      expect {
+        wait_for { raise RuntimeError }.not_to raise_error
+      }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
     end
   end
 end
