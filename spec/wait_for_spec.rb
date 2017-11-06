@@ -78,7 +78,7 @@ describe "wait_for" do
     it "prevents operator matchers" do
       expect {
         wait_for { progress }.to == "."
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, /operator matcher/)
     end
 
     it "accepts a value rather than a block" do
@@ -168,7 +168,7 @@ describe "wait_for" do
     it "prevents operator matchers" do
       expect {
         wait_for { progress }.not_to == ".."
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, /operator matcher/)
     end
 
     it "accepts a value rather than a block" do
