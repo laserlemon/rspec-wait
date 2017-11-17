@@ -1,22 +1,23 @@
-require "timeout"
-
 module RSpec
   module Wait
     module Handler
       def handle_matcher(target, *args, &block) # rubocop:disable Metrics/MethodLength
-        failure = nil
+        secs = RSpec.configuration.wait_timeout
+        t = Time.now
 
-        Timeout.timeout(RSpec.configuration.wait_timeout) do
-          begin
-            actual = target.respond_to?(:call) ? target.call : target
-            super(actual, *args, &block)
-          rescue RSpec::Expectations::ExpectationNotMetError => failure
+        begin
+          actual = target.respond_to?(:call) ? target.call : target
+          # TODO: raise TimeoutError if the block takes too long
+          val = super(actual, *args, &block)
+          raise TimeoutError if Time.now - t > secs   # HAX!
+          val
+        rescue RSpec::Expectations::ExpectationNotMetError => failure
+          if Time.now - t < secs
             sleep RSpec.configuration.wait_delay
             retry
           end
+          raise failure
         end
-      rescue Timeout::Error
-        raise failure || TimeoutError
       end
     end
 
