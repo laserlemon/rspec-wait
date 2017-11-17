@@ -5,15 +5,19 @@ module RSpec
     module Handler
       def handle_matcher(target, *args, &block) # rubocop:disable Metrics/MethodLength
         failure = nil
+        t = Time.now
 
-        Timeout.timeout(RSpec.configuration.wait_timeout) do
-          begin
+        begin
+          elapsed = Time.now - t
+          to = RSpec.configuration.wait_timeout - elapsed
+          raise Timeout::Error if to <= 0
+          Timeout.timeout(to) do
             actual = target.respond_to?(:call) ? target.call : target
             super(actual, *args, &block)
-          rescue RSpec::Expectations::ExpectationNotMetError => failure
-            sleep RSpec.configuration.wait_delay
-            retry
           end
+        rescue RSpec::Expectations::ExpectationNotMetError => failure
+          sleep RSpec.configuration.wait_delay
+          retry
         end
       rescue Timeout::Error
         raise failure || TimeoutError
