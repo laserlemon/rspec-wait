@@ -10,7 +10,6 @@ module RSpec
           begin
             actual = target.respond_to?(:call) ? target.call : target
             super(actual, *args, &block)
-            break
           rescue RSpec::Expectations::ExpectationNotMetError => failure
             sleep RSpec.configuration.wait_delay
             retry
