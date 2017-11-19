@@ -14,6 +14,7 @@ module RSpec
         elsif block
           raise ArgumentError, "You cannot pass both an argument and a block to `wait_for`." # rubocop:disable Metrics/LineLength
         else
+          warn "[DEPRECATION] As of rspec-wait version 1.0, neither wait_for nor wait.for will accept an argument, only a block." # rubocop:disable Metrics/LineLength
           new(value, options)
         end
       end

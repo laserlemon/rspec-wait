@@ -91,6 +91,8 @@ describe "wait" do
         }.to raise_error(ArgumentError, /operator matcher/)
       end
 
+      # TODO: Replace with a test asserting that an error is raised when passed a
+      # value argument for version 1.0.
       it "accepts a value rather than a block" do
         expect {
           wait.for(progress).to eq(".")
@@ -190,6 +192,8 @@ describe "wait" do
         }.to raise_error(ArgumentError, /operator matcher/)
       end
 
+      # TODO: Replace with a test asserting that an error is raised when passed a
+      # value argument for version 1.0.
       it "accepts a value rather than a block" do
         expect {
           wait.for(progress).not_to eq("..")
