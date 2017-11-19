@@ -5,6 +5,7 @@ module RSpec
       UndefinedValue = Module.new
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L30-L41
+      # rubocop:disable Metrics/MethodLength
       def self.for(value, block, options = {})
         if UndefinedValue.equal?(value)
           unless block
@@ -18,6 +19,7 @@ module RSpec
           new(value, options)
         end
       end
+      # rubocop:enable Metrics/MethodLength
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L25-L27
       def initialize(target, options)
