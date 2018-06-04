@@ -3,13 +3,13 @@ require "timeout"
 module RSpec
   module Wait
     module Handler
-      def handle_matcher(target, *args, &block) # rubocop:disable Metrics/MethodLength
+      def handle_matcher(target, matcher, message=nil, &block) # rubocop:disable Metrics/MethodLength
         failure = nil
 
         Timeout.timeout(RSpec.configuration.wait_timeout) do
           begin
             actual = target.respond_to?(:call) ? target.call : target
-            super(actual, *args, &block)
+            super(actual, matcher.clone, message, &block)
           rescue RSpec::Expectations::ExpectationNotMetError => failure
             sleep RSpec.configuration.wait_delay
             retry
