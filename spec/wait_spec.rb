@@ -30,6 +30,20 @@ describe "wait" do
         }.not_to raise_error
       end
 
+      it "does not use previous matcher state" do
+        feeder = Fiber.new do
+          a = 0
+          loop do
+            Fiber.yield [a, nil]
+            a += 1
+          end
+        end
+        
+        expect {
+          wait.for { feeder.resume }.to contain_exactly(nil, 2)
+        }.not_to raise_error
+      end
+
       it "fails if the matcher never passes" do
         expect {
           wait.for { progress }.to eq("...")
@@ -116,6 +130,20 @@ describe "wait" do
       it "re-evaluates the actual value" do
         expect {
           wait.for { progress.dup }.not_to eq("")
+        }.not_to raise_error
+      end
+
+      it "does not use previous matcher state" do
+        feeder = Fiber.new do
+          a = 0
+          loop do
+            Fiber.yield a >= 2 ? [a, nil] : [1, nil]
+            a += 1
+          end
+        end
+        
+        expect {
+          wait.for { feeder.resume }.not_to contain_exactly(nil, 1)
         }.not_to raise_error
       end
 
