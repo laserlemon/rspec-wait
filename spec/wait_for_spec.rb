@@ -30,16 +30,13 @@ describe "wait_for" do
     end
 
     it "does not use previous matcher state" do
-      feeder = Fiber.new do
-        a = 0
-        loop do
-          Fiber.yield [a, nil]
-          a += 1
-        end
-      end
+      feeder = Enumerator.new([
+        [1, nil],
+        [2, nil],
+      ])
       
       expect {
-        wait_for { feeder.resume }.to contain_exactly(nil, 2)
+        wait.for { feeder.next }.to contain_exactly(nil, 2)
       }.not_to raise_error
     end
 
@@ -124,16 +121,13 @@ describe "wait_for" do
     end
 
     it "does not use previous matcher state" do
-      feeder = Fiber.new do
-        a = 0
-        loop do
-          Fiber.yield a >= 2 ? [a, nil] : [1, nil]
-          a += 1
-        end
-      end
+      feeder = Enumerator.new([
+        [1, nil],
+        [2, nil],
+      ])
       
       expect {
-        wait_for { feeder.resume }.not_to contain_exactly(nil, 1)
+        wait_for { feeder.next }.not_to contain_exactly(nil, 1)
       }.not_to raise_error
     end
 
