@@ -1,22 +1,29 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+- rubocop-performance
+- rubocop-rake
+
 # This should always correspond to the earliest non-EOL Ruby version.
 AllCops:
-  TargetRubyVersion: 2.2
+  NewCops: enable
+  TargetRubyVersion: 3.0
 
-# TODO: Re-enable this cop after TomDoc code deocumentation is added.
+# TODO: Re-enable this cop after TomDoc code documentation is added.
 Style/Documentation:
   Enabled: false
 
-Metrics/BlockLength:
-  ExcludedMethods:
-    - context
-    - describe
-Metrics/LineLength:
+Layout/LineLength:
   IgnoreCopDirectives: true
+Metrics/BlockLength:
+  AllowedMethods:
+  - context
+  - describe
 Style/BlockDelimiters:
   EnforcedStyle: semantic
   FunctionalMethods:
-    - expect
-    - let
+  - expect
+  - let
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/SymbolArray:

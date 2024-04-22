@@ -5,21 +5,19 @@ module RSpec
       UndefinedValue = Module.new
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L30-L41
-      # rubocop:disable Metrics/MethodLength
       def self.for(value, block, options = {})
         if UndefinedValue.equal?(value)
           unless block
-            raise ArgumentError, "You must pass either an argument or a block to `wait_for`." # rubocop:disable Metrics/LineLength
+            raise ArgumentError, "You must pass either an argument or a block to `wait_for`."
           end
           new(block, options)
         elsif block
-          raise ArgumentError, "You cannot pass both an argument and a block to `wait_for`." # rubocop:disable Metrics/LineLength
+          raise ArgumentError, "You cannot pass both an argument and a block to `wait_for`."
         else
-          warn "[DEPRECATION] As of rspec-wait version 1.0, neither wait_for nor wait.for will accept an argument, only a block." # rubocop:disable Metrics/LineLength
+          warn "[DEPRECATION] As of rspec-wait version 1.0, neither wait_for nor wait.for will accept an argument, only a block."
           new(value, options)
         end
       end
-      # rubocop:enable Metrics/MethodLength
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L25-L27
       def initialize(target, options)
