@@ -19,6 +19,24 @@ jobs:
         - "3.2"
         - "3.3"
         - head
+        gemfile-path:
+        - Gemfile
+        - gemfiles/rspec_3_0.gemfile
+        - gemfiles/rspec_3_1.gemfile
+        - gemfiles/rspec_3_2.gemfile
+        - gemfiles/rspec_3_3.gemfile
+        - gemfiles/rspec_3_4.gemfile
+        - gemfiles/rspec_3_5.gemfile
+        - gemfiles/rspec_3_6.gemfile
+        - gemfiles/rspec_3_7.gemfile
+        - gemfiles/rspec_3_8.gemfile
+        - gemfiles/rspec_3_9.gemfile
+        - gemfiles/rspec_3_10.gemfile
+        - gemfiles/rspec_3_11.gemfile
+        - gemfiles/rspec_3_12.gemfile
+        - gemfiles/rspec_3_13.gemfile
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.gemfile-path }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby
@@ -27,4 +45,4 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true
     - name: Run tests
-      run: bundle exec rake
+      run: bundle exec rspec
