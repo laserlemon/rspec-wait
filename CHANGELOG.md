@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support for Ruby versions 3.0 through 3.3
+- Support for RSpec versions 3.6 through 3.13
+
+### Changed
+
+- Added RuboCop for consistent code style
+- Move CI from Travis to GitHub Actions
+
+### Deprecated
+
+- Passing an argument to wait_for or wait.for
+
+### Removed
+
+- Support for all Ruby 2.x versions
+- Support for all RSpec 2.x versions
+- Support for RSpec versions 3.0 through 3.3
+- RSpec::Wait.version (in favor of RSpec::Wait::VERSION)
+
 ## [0.0.9] - 2016-07-11
 
 ### Added
