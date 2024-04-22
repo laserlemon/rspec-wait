@@ -1,24 +1,37 @@
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "rspec/wait/version"
+# frozen_string_literal: true
+
+require_relative "lib/rspec/wait/version"
 
 Gem::Specification.new do |spec|
-  spec.name    = "rspec-wait"
-  spec.version = RSpec::Wait.version
+  spec.name = "rspec-wait"
+  spec.summary = "Wait for conditions in RSpec"
+  spec.description = "RSpec::Wait enables time-resilient expectations in your RSpec test suite."
+  spec.version = RSpec::Wait::VERSION
 
   spec.author = "Steve Richert"
-  spec.email  = "steve.richert@gmail.com"
+  spec.email = "steve.richert@hey.com"
+  spec.license = "MIT"
+  spec.homepage = "https://github.com/laserlemon/rspec-wait"
 
-  spec.summary     = "Wait for conditions in RSpec"
-  spec.description = "RSpec::Wait enables time-resilient expectations in your RSpec test suite."
-  spec.homepage    = "https://github.com/laserlemon/rspec-wait"
-  spec.license     = "MIT"
+  spec.metadata = {
+    "allowed_push_host" => "https://rubygems.org",
+    "bug_tracker_uri" => "https://github.com/laserlemon/rspec-wait/issues",
+    "funding_uri" => "https://github.com/sponsors/laserlemon",
+    "homepage_uri" => "https://github.com/laserlemon/rspec-wait",
+    "rubygems_mfa_required" => "true",
+    "source_code_uri" => "https://github.com/laserlemon/rspec-wait",
+  }
 
-  spec.files      = `git ls-files -z`.split("\x0")
-  spec.test_files = spec.files.grep(/^spec/)
+  spec.required_ruby_version = ">= 3.0"
+  spec.add_dependency "rspec", ">= 3.4"
+  spec.add_development_dependency "bundler", ">= 2.0"
+  spec.add_development_dependency "rake", ">= 13.0"
 
-  spec.add_dependency "rspec", ">= 3"
+  spec.files = Dir.glob([
+    "rspec-wait.gemspec",
+    "lib/**/*.rb",
+    "LICENSE.txt",
+  ])
 
-  spec.add_development_dependency "bundler"
-  spec.add_development_dependency "rake"
+  spec.extra_rdoc_files = ["README.md"]
 end
