@@ -2,11 +2,9 @@
 
 Wait for conditions in RSpec
 
-[![Gem Version](https://img.shields.io/gem/v/rspec-wait.svg?style=flat-square)](https://rubygems.org/gems/rspec-wait)
-[![Build Status](https://img.shields.io/travis/laserlemon/rspec-wait/master.svg?style=flat-square)](https://travis-ci.org/laserlemon/rspec-wait)
-[![Code Climate](https://img.shields.io/codeclimate/github/laserlemon/rspec-wait.svg?style=flat-square)](https://codeclimate.com/github/laserlemon/rspec-wait)
-[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/laserlemon/rspec-wait.svg?style=flat-square)](https://codeclimate.com/github/laserlemon/rspec-wait)
-[![Dependency Status](https://img.shields.io/gemnasium/laserlemon/rspec-wait.svg?style=flat-square)](https://gemnasium.com/laserlemon/rspec-wait)
+[![Gem Version](https://img.shields.io/gem/v/rspec-wait)](http://rubygems.org/gems/rspec-wait)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/laserlemon/rspec-wait/rake.yml)](https://github.com/laserlemon/rspec-wait/actions/workflows/rake.yml)
+[![License](https://img.shields.io/github/license/laserlemon/rspec-wait)](https://github.com/laserlemon/rspec-wait/blob/-/LICENSE.txt)
 
 ## Why does RSpec::Wait exist?
 
