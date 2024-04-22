@@ -8,7 +8,6 @@ on:
     - main
 jobs:
   test:
-    name: Ruby ${{ matrix.ruby-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
