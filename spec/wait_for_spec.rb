@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe "wait_for" do
+RSpec.describe "wait_for" do
   let(:progress) { +"" }
 
   before do
@@ -87,8 +87,10 @@ describe "wait_for" do
     # value argument for version 1.0.
     it "accepts a value rather than a block" do
       expect {
-        wait_for(progress).to eq(".")
-      }.not_to raise_error
+        expect {
+          wait_for(progress).to eq(".")
+        }.not_to raise_error
+      }.to output(/DEPRECATION/).to_stderr
     end
   end
 
@@ -179,8 +181,10 @@ describe "wait_for" do
     # value argument for version 1.0.
     it "accepts a value rather than a block" do
       expect {
-        wait_for(progress).not_to eq("..")
-      }.not_to raise_error
+        expect {
+          wait_for(progress).not_to eq("..")
+        }.not_to raise_error
+      }.to output(/DEPRECATION/).to_stderr
     end
   end
 end

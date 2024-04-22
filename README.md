@@ -31,7 +31,7 @@ because it may need to evaluate the content of that block multiple times while
 waiting.
 
 ```ruby
-describe Ticker do
+RSpec.describe Ticker do
   subject(:ticker) { Ticker.new("foo") }
 
   describe "#start" do
