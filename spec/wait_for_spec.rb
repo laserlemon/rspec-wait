@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 describe "wait_for" do
-  let(:progress) { "" }
+  let(:progress) { +"" }
 
   before do
     Thread.new do
@@ -10,7 +12,7 @@ describe "wait_for" do
     end
   end
 
-  context "to" do
+  describe "to" do
     it "passes immediately" do
       expect {
         wait_for { progress }.to eq("")
@@ -90,7 +92,7 @@ describe "wait_for" do
     end
   end
 
-  context "not_to" do
+  describe "not_to" do
     it "passes immediately" do
       expect {
         wait_for { progress }.not_to eq("..")
@@ -157,13 +159,13 @@ describe "wait_for" do
 
     it "respects the to_not alias when expectation is met" do
       expect {
-        wait_for { true }.to_not eq(false)
+        wait_for { true }.to_not be(false) # rubocop:disable RSpec/NotToNot
       }.not_to raise_error
     end
 
     it "respects the to_not alias when expectation is not met" do
       expect {
-        wait_for { true }.to_not eq(true)
+        wait_for { true }.to_not be(true) # rubocop:disable RSpec/NotToNot
       }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
     end
 

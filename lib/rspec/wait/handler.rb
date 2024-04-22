@@ -1,19 +1,24 @@
+# frozen_string_literal: true
+
 require "timeout"
 
 module RSpec
   module Wait
+    # The RSpec::Wait::Handler module is common functionality shared between
+    # the RSpec::Wait::PositiveHandler and RSpec::Wait::NegativeHandler classes
+    # defined below. The module overrides RSpec's handle_matcher method,
+    # allowing a block target to be repeatedly evaluated until the underlying
+    # matcher passes or the configured timeout elapses.
     module Handler
       def handle_matcher(target, *args, &block)
         failure = nil
 
         Timeout.timeout(RSpec.configuration.wait_timeout) do
-          begin
-            actual = target.respond_to?(:call) ? target.call : target
-            super(actual, *args, &block)
-          rescue RSpec::Expectations::ExpectationNotMetError => failure
-            sleep RSpec.configuration.wait_delay
-            retry
-          end
+          actual = target.respond_to?(:call) ? target.call : target
+          super(actual, *args, &block)
+        rescue RSpec::Expectations::ExpectationNotMetError => failure
+          sleep RSpec.configuration.wait_delay
+          retry
         end
       rescue Timeout::Error
         raise failure || TimeoutError

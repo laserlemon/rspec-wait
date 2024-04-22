@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
 module RSpec
   module Wait
+    # The RSpec::Wait::Target class inherits from RSpec's internal
+    # RSpec::Expectations::ExpectationTarget class and allows the inclusion of
+    # RSpec::Wait options via RSpec::Wait::Proxy.
     class Target < RSpec::Expectations::ExpectationTarget
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L22
       UndefinedValue = Module.new
@@ -7,14 +12,14 @@ module RSpec
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L30-L41
       def self.for(value, block, options = {})
         if UndefinedValue.equal?(value)
-          unless block
-            raise ArgumentError, "You must pass either an argument or a block to `wait_for`."
-          end
+          raise ArgumentError, "You must pass either an argument or a block to `wait_for`." unless block
+
           new(block, options)
         elsif block
           raise ArgumentError, "You cannot pass both an argument and a block to `wait_for`."
         else
-          warn "[DEPRECATION] As of rspec-wait version 1.0, neither wait_for nor wait.for will accept an argument, only a block."
+          warn "[DEPRECATION] As of rspec-wait version 1.0, " \
+            "neither wait_for nor wait.for will accept an argument, only a block."
           new(value, options)
         end
       end
@@ -45,8 +50,8 @@ module RSpec
 
       private
 
-      def with_wait
-        Wait.with_wait(@wait_options) { yield }
+      def with_wait(&block)
+        Wait.with_wait(@wait_options, &block)
       end
     end
   end
