@@ -17,16 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added RuboCop for consistent code style
 - Move CI from Travis to GitHub Actions
 
-### Deprecated
-
-- Passing an argument to wait_for or wait.for
-
 ### Removed
 
 - Support for all Ruby 2.x versions
 - Support for all RSpec 2.x versions
 - Support for RSpec versions 3.0 through 3.3
 - RSpec::Wait.version (in favor of RSpec::Wait::VERSION)
+- Passing an argument to wait_for or wait.for (must pass a block)
 
 ## [0.0.9] - 2016-07-11
 

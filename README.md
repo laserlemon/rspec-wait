@@ -44,9 +44,9 @@ RSpec.describe Ticker do
     end
 
     it "writes the message one letter at a time" do
-      wait_for(ticker.tape).to eq("··-·")
-      wait_for(ticker.tape).to eq("··-· ---")
-      wait_for(ticker.tape).to eq("··-· --- ---")
+      wait_for { ticker.tape }.to eq("··-·")
+      wait_for { ticker.tape }.to eq("··-· ---")
+      wait_for { ticker.tape }.to eq("··-· --- ---")
     end
   end
 end

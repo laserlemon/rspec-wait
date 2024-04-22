@@ -14,8 +14,7 @@ module RSpec
         failure = nil
 
         Timeout.timeout(RSpec.configuration.wait_timeout) do
-          actual = target.respond_to?(:call) ? target.call : target
-          super(actual, *args, &block)
+          super(target.call, *args, &block)
         rescue RSpec::Expectations::ExpectationNotMetError => failure
           sleep RSpec.configuration.wait_delay
           retry

@@ -83,14 +83,10 @@ RSpec.describe "wait_for" do
       }.to raise_error(ArgumentError, /operator matcher/)
     end
 
-    # TODO: Replace with a test asserting that an error is raised when passed a
-    # value argument for version 1.0.
-    it "accepts a value rather than a block" do
+    it "only accepts a block" do
       expect {
-        expect {
-          wait_for(progress).to eq(".")
-        }.not_to raise_error
-      }.to output(/DEPRECATION/).to_stderr
+        wait_for(progress).to eq(".")
+      }.to raise_error(ArgumentError, /block/)
     end
   end
 
@@ -177,14 +173,10 @@ RSpec.describe "wait_for" do
       }.to raise_error(ArgumentError, /operator matcher/)
     end
 
-    # TODO: Replace with a test asserting that an error is raised when passed a
-    # value argument for version 1.0.
-    it "accepts a value rather than a block" do
+    it "only accepts a block" do
       expect {
-        expect {
-          wait_for(progress).not_to eq("..")
-        }.not_to raise_error
-      }.to output(/DEPRECATION/).to_stderr
+        wait_for(progress).not_to eq("..")
+      }.to raise_error(ArgumentError, /block/)
     end
   end
 end
