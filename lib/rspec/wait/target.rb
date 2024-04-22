@@ -11,17 +11,17 @@ module RSpec
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L30-L41
       def self.for(value, block, options = {})
-        if UndefinedValue.equal?(value) && block
-          new(block, options)
-        else
+        unless UndefinedValue.equal?(value) && block
           raise ArgumentError, "The wait_for method only accepts a block."
         end
+
+        new(block, options)
       end
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L25-L27
-      def initialize(block, options)
+      def initialize(target, options)
         @wait_options = options
-        @target = block
+        super(target)
       end
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L53-L54

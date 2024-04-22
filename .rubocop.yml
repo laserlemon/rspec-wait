@@ -32,6 +32,8 @@ RSpec/MultipleExpectations:
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
+Style/IfUnlessModifier:
+  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
