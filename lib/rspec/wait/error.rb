@@ -2,8 +2,7 @@
 
 module RSpec
   module Wait
-    class Error < StandardError; end
-
-    class TimeoutError < Error; end
+    Error = Class.new(StandardError)
+    TimeoutError = Class.new(Error)
   end
 end
