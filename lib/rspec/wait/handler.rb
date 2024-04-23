@@ -14,10 +14,10 @@ module RSpec
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
         begin
-          if matcher.supports_value_expectations?
-            super(target.call, matcher, *args, &block)
-          elsif matcher.supports_block_expectations?
+          if matcher.supports_block_expectations?
             super(target, matcher, *args, &block)
+          else
+            super(target.call, matcher, *args, &block)
           end
         rescue RSpec::Expectations::ExpectationNotMetError
           elapsed_time = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
