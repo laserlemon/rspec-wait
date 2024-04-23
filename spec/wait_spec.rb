@@ -87,6 +87,18 @@ RSpec.describe "wait" do
           wait.for(progress).to eq(".")
         }.to raise_error(ArgumentError, /block/)
       end
+
+      it "waits for a block matcher when the expectation is met" do
+        expect {
+          wait.for { progress }.not_to raise_error
+        }.not_to raise_error
+      end
+
+      it "waits for a block matcher when the expectation is not met" do
+        expect {
+          wait.for { raise StandardError, "boom" }.not_to raise_error
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
+      end
     end
 
     describe "not_to" do
@@ -164,13 +176,27 @@ RSpec.describe "wait" do
         }.to raise_error(ArgumentError, /block/)
       end
 
-      it "respects the to_not alias when expectation is met" do
+      it "waits for a block matcher when the expectation is met" do
+        expect {
+          wait.for { progress }.not_to raise_error
+        }.not_to raise_error
+      end
+
+      it "waits for a block matcher when the expectation is not met" do
+        expect {
+          wait.for { raise StandardError, "boom" }.not_to raise_error
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
+      end
+    end
+
+    describe "to_not" do
+      it "respects the to_not alias when the expectation is met" do
         expect {
           wait(1).for { true }.to_not eq(false) # rubocop:disable RSpec/NotToNot
         }.not_to raise_error
       end
 
-      it "respects the to_not alias when expectation is not met" do
+      it "respects the to_not alias when the expectation is not met" do
         expect {
           wait(1).for { true }.to_not eq(true) # rubocop:disable RSpec/NotToNot
         }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
