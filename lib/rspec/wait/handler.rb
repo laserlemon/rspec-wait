@@ -11,16 +11,17 @@ module RSpec
     # matcher passes or the configured timeout elapses.
     module Handler
       def handle_matcher(target, *args, &block)
-        failure = nil
+        start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
-        Timeout.timeout(RSpec.configuration.wait_timeout) do
+        begin
           super(target.call, *args, &block)
-        rescue RSpec::Expectations::ExpectationNotMetError => failure
+        rescue RSpec::Expectations::ExpectationNotMetError
+          elapsed_time = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
+          raise if elapsed_time > RSpec.configuration.wait_timeout
+
           sleep RSpec.configuration.wait_delay
           retry
         end
-      rescue Timeout::Error
-        raise failure || TimeoutError
       end
     end
 

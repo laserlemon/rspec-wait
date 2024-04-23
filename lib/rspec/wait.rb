@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "rspec"
-require "rspec/wait/error"
 require "rspec/wait/handler"
 require "rspec/wait/proxy"
 require "rspec/wait/target"

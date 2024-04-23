@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added RuboCop for consistent code style
 - Move CI from Travis to GitHub Actions
+- Stop using Ruby's dangerous `Timeout` API.
+  Only evaluate the timeout condition after successfully calling the matcher's block, never mid-call.
 
 ### Removed
 
@@ -24,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for RSpec versions 3.0 through 3.3
 - RSpec::Wait.version (in favor of RSpec::Wait::VERSION)
 - Passing an argument to wait_for or wait.for (must pass a block)
+- RSpec::Wait::TimeoutError in favor of RSpec failure
 
 ## [0.0.9] - 2016-07-11
 

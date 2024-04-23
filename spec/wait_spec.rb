@@ -5,7 +5,7 @@ RSpec.describe "wait" do
 
   before do
     Thread.new do
-      2.times do
+      11.times do
         sleep 1
         progress << "."
       end
@@ -34,57 +34,46 @@ RSpec.describe "wait" do
 
       it "fails if the matcher never passes" do
         expect {
-          wait.for { progress }.to eq("...")
+          wait.for { progress }.to eq("." * 12)
         }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
 
-      it "times out if the block never finishes" do
+      it "passes even if call time exceeds the timeout" do
         expect {
           wait.for {
-            sleep 11
+            sleep 12
             progress
-          }.to eq("..")
-        }.to raise_error(RSpec::Wait::TimeoutError)
+          }.to eq("." * 11)
+        }.not_to raise_error
       end
 
       it "respects a timeout specified in configuration" do
         original_timeout = RSpec.configuration.wait_timeout
         RSpec.configuration.wait_timeout = 3
 
-        begin
-          expect {
-            wait.for {
-              sleep 4
-              progress
-            }.to eq("..")
-          }.to raise_error(RSpec::Wait::TimeoutError)
-        ensure
-          RSpec.configuration.wait_timeout = original_timeout
-        end
+        expect {
+          wait.for { progress }.to eq("." * 4)
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
+      ensure
+        RSpec.configuration.wait_timeout = original_timeout
       end
 
-      it "respects a timeout specified in options", wait: { timeout: 3 } do
+      it "respects a timeout specified in example metadata", wait: { timeout: 3 } do
         expect {
-          wait.for {
-            sleep 4
-            progress
-          }.to eq("..")
-        }.to raise_error(RSpec::Wait::TimeoutError)
+          wait.for { progress }.to eq("." * 4)
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
 
       it "respects a timeout specified as an argument" do
         expect {
-          wait(3).for {
-            sleep 4
-            progress
-          }.to eq("..")
-        }.to raise_error(RSpec::Wait::TimeoutError)
+          wait(3).for { progress }.to eq("." * 4)
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
 
       it "raises an error occuring in the block" do
         expect {
-          wait.for { raise RuntimeError }.to eq("..")
-        }.to raise_error(RuntimeError)
+          wait.for { raise StandardError, "boom" }.to eq("..")
+        }.to raise_error(StandardError, "boom")
       end
 
       it "prevents operator matchers" do
@@ -125,65 +114,42 @@ RSpec.describe "wait" do
         }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
 
-      it "times out if the block never finishes" do
+      it "passes even if call time exceeds the timeout" do
         expect {
           wait.for {
-            sleep 11
+            sleep 12
             progress
           }.not_to eq("..")
-        }.to raise_error(RSpec::Wait::TimeoutError)
+        }.not_to raise_error
       end
 
       it "respects a timeout specified in configuration" do
         original_timeout = RSpec.configuration.wait_timeout
         RSpec.configuration.wait_timeout = 3
 
-        begin
-          expect {
-            wait.for {
-              sleep 4
-              progress
-            }.not_to eq("..")
-          }.to raise_error(RSpec::Wait::TimeoutError)
-        ensure
-          RSpec.configuration.wait_timeout = original_timeout
-        end
+        expect {
+          wait.for { progress }.not_to match(/\A\.{0,3}\z/)
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
+      ensure
+        RSpec.configuration.wait_timeout = original_timeout
       end
 
-      it "respects a timeout specified in options", wait: { timeout: 3 } do
+      it "respects a timeout specified in example metadata", wait: { timeout: 3 } do
         expect {
-          wait.for {
-            sleep 4
-            progress
-          }.not_to eq("..")
-        }.to raise_error(RSpec::Wait::TimeoutError)
+          wait.for { progress }.not_to match(/\A\.{0,3}\z/)
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
 
       it "respects a timeout specified as an argument" do
         expect {
-          wait(3).for {
-            sleep 4
-            progress
-          }.not_to eq("..")
-        }.to raise_error(RSpec::Wait::TimeoutError)
+          wait(3).for { progress }.not_to match(/\A\.{0,3}\z/)
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
 
       it "raises an error occuring in the block" do
         expect {
-          wait.for { raise RuntimeError }.not_to eq("")
-        }.to raise_error(RuntimeError)
-      end
-
-      it "respects the to_not alias when expectation is met" do
-        expect {
-          wait(1).for { true }.to_not be(false) # rubocop:disable RSpec/NotToNot
-        }.not_to raise_error
-      end
-
-      it "respects the to_not alias when expectation is not met" do
-        expect {
-          wait(1).for { true }.to_not be(true) # rubocop:disable RSpec/NotToNot
-        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
+          wait.for { raise StandardError, "boom" }.not_to eq("")
+        }.to raise_error(StandardError, "boom")
       end
 
       it "prevents operator matchers" do
@@ -196,6 +162,18 @@ RSpec.describe "wait" do
         expect {
           wait.for(progress).not_to eq("..")
         }.to raise_error(ArgumentError, /block/)
+      end
+
+      it "respects the to_not alias when expectation is met" do
+        expect {
+          wait(1).for { true }.to_not eq(false) # rubocop:disable RSpec/NotToNot
+        }.not_to raise_error
+      end
+
+      it "respects the to_not alias when expectation is not met" do
+        expect {
+          wait(1).for { true }.to_not eq(true) # rubocop:disable RSpec/NotToNot
+        }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
       end
     end
   end
