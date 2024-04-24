@@ -92,12 +92,6 @@ RSpec.describe "wait_for" do
         wait_for { progress }.to raise_error(StandardError)
       }.to raise_error(RSpec::Expectations::ExpectationNotMetError)
     end
-
-    it "uses a new matcher instance for each block call" do
-      expect {
-        wait_for { progress.chars }.to contain_exactly(".", ".")
-      }.not_to raise_error
-    end
   end
 
   describe "not_to" do

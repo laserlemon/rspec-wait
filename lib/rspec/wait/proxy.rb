@@ -10,12 +10,14 @@ module RSpec
     #   wait(3.seconds).for { this }.to eq(that)
     #
     class Proxy
-      def initialize(options)
+      def initialize(options = {})
         @options = options
       end
 
-      def for(value = Target::UndefinedValue, &block)
-        Target.for(value, block, @options)
+      def for(*args, &block)
+        raise ArgumentError, "The `wait.for` method only accepts a block." if args.any?
+
+        Target.new(block, @options)
       end
     end
   end

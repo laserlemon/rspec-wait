@@ -6,22 +6,10 @@ module RSpec
     # RSpec::Expectations::ExpectationTarget class and allows the inclusion of
     # RSpec::Wait options via RSpec::Wait::Proxy.
     class Target < RSpec::Expectations::ExpectationTarget
-      # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L22
-      UndefinedValue = Module.new
-
-      # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L30-L41
-      def self.for(value, block, options = {})
-        unless UndefinedValue.equal?(value) && block
-          raise ArgumentError, "You must pass a block to `wait_for`."
-        end
-
-        new(block, options)
-      end
-
       # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L25-L27
-      def initialize(target, options)
+      def initialize(block, options = {})
         @wait_options = options
-        super(target)
+        super(block)
       end
 
       # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L52-L55
