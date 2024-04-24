@@ -10,10 +10,12 @@ module RSpec
     # allowing a block target to be repeatedly evaluated until the underlying
     # matcher passes or the configured timeout elapses.
     module Handler
-      def handle_matcher(target, matcher, message, &block)
+      def handle_matcher(target, initial_matcher, message, &block)
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
         begin
+          matcher = RSpec.configuration.clone_wait_matcher ? initial_matcher.clone : initial_matcher
+
           if matcher.supports_block_expectations?
             super(target, matcher, message, &block)
           else

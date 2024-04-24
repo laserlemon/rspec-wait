@@ -12,6 +12,7 @@ module RSpec
   module Wait
     DEFAULT_TIMEOUT = 10
     DEFAULT_DELAY = 0.1
+    DEFAULT_CLONE_MATCHER = false
 
     module_function
 
@@ -22,22 +23,24 @@ module RSpec
       Target.new(block)
     end
 
-    def wait(timeout = nil, options = {})
-      options[:timeout] = timeout if timeout
-      Proxy.new(options)
+    def wait(arg = nil, timeout: arg, delay: nil, clone_matcher: nil)
+      Proxy.new(timeout: timeout, delay: delay, clone_matcher: clone_matcher)
     end
 
     def with_wait(options)
       original_timeout = RSpec.configuration.wait_timeout
       original_delay = RSpec.configuration.wait_delay
+      original_clone_matcher = RSpec.configuration.clone_wait_matcher
 
       RSpec.configuration.wait_timeout = options[:timeout] if options[:timeout]
       RSpec.configuration.wait_delay = options[:delay] if options[:delay]
+      RSpec.configuration.clone_wait_matcher = options[:clone_matcher] if options.key?(:clone_matcher)
 
       yield
     ensure
       RSpec.configuration.wait_timeout = original_timeout
       RSpec.configuration.wait_delay = original_delay
+      RSpec.configuration.clone_wait_matcher = original_clone_matcher
     end
   end
 end
@@ -47,6 +50,7 @@ RSpec.configure do |config|
 
   config.add_setting(:wait_timeout, default: RSpec::Wait::DEFAULT_TIMEOUT)
   config.add_setting(:wait_delay, default: RSpec::Wait::DEFAULT_DELAY)
+  config.add_setting(:clone_wait_matcher, default: RSpec::Wait::DEFAULT_CLONE_MATCHER)
 
   config.around(wait: {}) do |example|
     options = example.metadata.fetch(:wait)
