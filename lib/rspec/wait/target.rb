@@ -6,25 +6,25 @@ module RSpec
     # RSpec::Expectations::ExpectationTarget class and allows the inclusion of
     # RSpec::Wait options via RSpec::Wait::Proxy.
     class Target < RSpec::Expectations::ExpectationTarget
-      # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L22
+      # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L22
       UndefinedValue = Module.new
 
-      # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L30-L41
+      # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L30-L41
       def self.for(value, block, options = {})
         unless UndefinedValue.equal?(value) && block
-          raise ArgumentError, "The wait_for method only accepts a block."
+          raise ArgumentError, "You must pass a block to `wait_for`."
         end
 
         new(block, options)
       end
 
-      # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L25-L27
+      # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L25-L27
       def initialize(target, options)
         @wait_options = options
         super(target)
       end
 
-      # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L53-L54
+      # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L52-L55
       def to(matcher = nil, message = nil, &block)
         prevent_operator_matchers(:to) unless matcher
 
@@ -33,7 +33,7 @@ module RSpec
         end
       end
 
-      # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/expectation_target.rb#L66-L67
+      # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/expectation_target.rb#L65-L68
       def not_to(matcher = nil, message = nil, &block)
         prevent_operator_matchers(:not_to) unless matcher
 

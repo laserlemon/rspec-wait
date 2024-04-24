@@ -29,12 +29,12 @@ module RSpec
       end
     end
 
-    # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/handler.rb#L44-L63
+    # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/handler.rb#L46-L65
     class PositiveHandler < RSpec::Expectations::PositiveExpectationHandler
       extend Handler
     end
 
-    # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/handler.rb#L66-L93
+    # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/handler.rb#L68-L95
     class NegativeHandler < RSpec::Expectations::NegativeExpectationHandler
       extend Handler
     end
