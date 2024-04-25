@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# The helper methods defined by PassFailExpectations are available in the
+# context of an RSpec example. Their purpose is to clean up common assertions
+# for readability.
 module PassFailExpectations
   def expect_pass(&block)
     expect(&block).not_to raise_error

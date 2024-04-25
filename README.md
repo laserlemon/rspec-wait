@@ -22,13 +22,12 @@ syntactic sugar that you already know and love.
 
 RSpec::Wait will keep trying until your assertion passes or times out.
 
-### Example
+### Examples
 
 RSpec::Wait's `wait_for` assertions are nearly drop-in replacements for RSpec's
-`expect` assertions. The major difference is that the `wait_for` method only
-works with non-block matchers. However, `wait_for` will still accept a block
-because it may need to evaluate the content of that block multiple times while
-waiting.
+`expect` assertions. The major difference is that the `wait_for` method
+requires a block because it may need to evaluate the content of that block
+multiple times while it's waiting.
 
 ```ruby
 RSpec.describe Ticker do
@@ -39,11 +38,11 @@ RSpec.describe Ticker do
       ticker.start
     end
 
-    it "starts a blank tape" do
+    it "starts with a blank tape" do
       expect(ticker.tape).to eq("")
     end
 
-    it "writes the message one letter at a time" do
+    it "sends the message in Morse code one letter at a time" do
       wait_for { ticker.tape }.to eq("··-·")
       wait_for { ticker.tape }.to eq("··-· ---")
       wait_for { ticker.tape }.to eq("··-· --- ---")
@@ -52,8 +51,8 @@ RSpec.describe Ticker do
 end
 ```
 
-This can be especially useful for testing user interfaces with tricky timing
-elements like JavaScript interactions or remote requests.
+RSpec::Wait can be especially useful for testing user interfaces with tricky
+timing elements like JavaScript interactions or remote requests.
 
 ```ruby
 feature "User Login" do
@@ -72,31 +71,104 @@ feature "User Login" do
 end
 ```
 
+## Compatibility
+
+### Ruby Support
+
+RSpec::Wait is tested against all [non-EOL Ruby versions](https://www.ruby-lang.org/en/downloads/branches/),
+which as of this writing are versions 3.1, 3.2, and 3.3. If you find that
+RSpec::Wait does not work or [is not tested](https://github.com/laserlemon/rspec-wait/blob/-/.github/workflows/rake.yml)
+for a maintained Ruby version, please [open an issue](https://github.com/laserlemon/rspec-wait/issues/new)
+or pull request to add support.
+
+Additionally, RSpec::Wait is tested against Ruby head to surface future
+compatibility issues, but no guarantees are made that RSpec::Wait will
+function as expected on Ruby head. Proceed with caution!
+
+### RSpec Support
+
+RSpec::Wait is tested against several [versions of RSpec](https://rubygems.org/gems/rspec/versions),
+which as of this writing are versions 3.4 through 3.13. If you find that
+RSpec::Wait does not work or [is not tested](https://github.com/laserlemon/rspec-wait/blob/-/.github/workflows/rake.yml)
+for a newer RSpec version, please [open an issue](https://github.com/laserlemon/rspec-wait/issues/new)
+or pull request to add support.
+
+Additionally, RSpec::Wait is tested against unbounded RSpec to surface future
+compatibility issues, but no guarantees are made that RSpec::Wait will
+function as expected on any RSpec version that's not explicitly [tested](https://github.com/laserlemon/rspec-wait/blob/-/.github/workflows/rake.yml).
+Proceed with caution!
+
 ### Matchers
 
 RSpec::Wait ties into RSpec's internals so it can take full advantage of any
-non-block matcher that you would use with RSpec's own `expect` method.
+matcher that you would use with RSpec's own `expect` method.
 
-### Timeout
+If you discover a matcher that works with `expect` but not with `wait_for`,
+please [open an issue](https://github.com/laserlemon/rspec-wait/issues/new)
+and I'd be happy to take a look!
 
-By default, RSpec::Wait will wait up to 10 seconds for an assertion to pass.
-That timeout value is configurable in three ways:
+## Installation
 
-#### RSpec Configuration
+To get started with RSpec::Wait, simply add the dependency to your `Gemfile`
+and `bundle install`:
+
+```ruby
+gem "rspec-wait", "~> 1.0"
+```
+
+If your codebase calls `Bundler.require` at boot time, you're all set and the
+`wait_for` method is already available in your RSpec suite.
+
+If you encounter the following error:
+
+```
+NoMethodError:
+  undefined method `wait_for'
+```
+
+You will need to explicitly require RSpec::Wait at boot time in your test
+environment:
+
+```ruby
+require "rspec/wait"
+```
+
+## Configuration
+
+RSpec::Wait has three available configuration values:
+
+- `wait_timeout` - The maximum amount of time (in seconds) that RSpec::Wait
+  will continue to retry a failing assertion. Default: `10.0`
+- `wait_delay` - How long (in seconds) RSpec::Wait will pause between retries.
+  Default: `0.1`
+- `clone_wait_matcher` - Whether each retry will `clone` the given RSpec
+  matcher instance for each evaluation. Set to `true` if you have trouble with
+  a matcher holding onto stale state. Default: `false`
+
+RSpec::Wait configurations can be set in three ways:
+
+- Globally via `RSpec.configure`
+- Per example or context via RSpec metadata
+- Per assertion via the `wait` method
+
+### Global Configuration
 
 ```ruby
 RSpec.configure do |config|
   config.wait_timeout = 3 # seconds
+  config.wait_delay = 0.5 # seconds
+  config.clone_wait_matcher = true
 end
 ```
 
-#### RSpec Metadata
+### RSpec Metadata
 
-The timeout can also be specified via options added to a spec's or context's
-`:wait` metadata:
+Any of RSpec::Wait's three configurations can be set on a per-example or
+per-context basis using `wait` metadata. Provide a hash containing any
+number of shorthand keys and values for RSpec::Wait's configurations.
 
 ```ruby
-scenario "A user can log in successfully", wait: { timeout: 3 } do
+scenario "A user can log in successfully", wait: { timeout: 3, delay: 0.5, clone_wait_matcher: true } do
   visit new_session_path
 
   fill_in "Email", with: "john@example.com"
@@ -108,9 +180,12 @@ scenario "A user can log in successfully", wait: { timeout: 3 } do
 end
 ```
 
-#### The `wait` Method
+### The `wait` Method
 
-On a per-assertion basis, the timeout value can be passed to the `wait` method.
+And on a per-assertion basis, the `wait` method accepts a hash of shorthand
+keys and values for RSpec::Wait's configurations. The `wait` method must be
+chained to the `for` method and aside from the ability to set RSpec::Wait
+configuration for the single assertion, it behaves identically to `wait_for`.
 
 ```ruby
 scenario "A user can log in successfully" do
@@ -120,12 +195,47 @@ scenario "A user can log in successfully" do
   fill_in "Password", with: "secret"
   click_button "Log In"
 
-  wait(3.seconds).for { current_path }.to eq(account_path)
+  wait(timeout: 3).for { current_path }.to eq(account_path)
   expect(page).to have_content("Welcome back!")
 end
 ```
 
-### Use with Cucumber
+The `wait` method will also accept `timeout` as a positional argument for
+improved readability:
+
+```ruby
+wait(3.seconds).for { current_path }.to eq(account_path)
+```
+
+## Use with RuboCop
+
+If you use `rubocop` and `rubocop-rspec` in your codebase, an RSpec example
+with a single `wait_for` assertion may cause RuboCop to complain:
+
+```
+RSpec/NoExpectationExample: No expectation found in this example.
+```
+
+By default, RuboCop sees only `expect*` and `assert*` methods as expectations.
+You can configure RuboCop to recognize `wait_for` and `wait.for` as
+expectations (in addition to the defaults) in your RuboCop configuration:
+
+```yaml
+RSpec/NoExpectationExample:
+  AllowedPatterns:
+  - ^assert_
+  - ^expect_
+  - ^wait(_for)?$
+```
+
+Of course, you can always disable this cop entirely:
+
+```yaml
+RSpec/NoExpectationExample:
+  Enabled: false
+```
+
+## Use with Cucumber
 
 To enable RSpec::Wait in your Cucumber step definitions, add the following to
 `features/support/env.rb`:
@@ -145,7 +255,7 @@ and [contribution](https://github.com/laserlemon/rspec-wait/graphs/contributors)
 from the Ruby community, especially the [authors and maintainers](https://github.com/rspec/rspec-core/graphs/contributors)
 of RSpec.
 
-**Thank you!**
+**Thank you!** :yellow_heart:
 
 ## How can I help?
 
@@ -154,3 +264,6 @@ No contribution is too small.
 
 See RSpec::Wait's [contribution guidelines](CONTRIBUTING.md) for more
 information.
+
+If you're enjoying RSpec::Wait, please consider [sponsoring](https://github.com/sponsors/laserlemon)
+my [open source work](https://github.com/laserlemon)! :green_heart:

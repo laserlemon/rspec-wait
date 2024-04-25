@@ -11,7 +11,7 @@ module RSpec
   # The RSpec::Wait module is included into RSpec's example environment, making
   # the wait_for, wait, and with_wait methods available inside each spec.
   module Wait
-    DEFAULT_TIMEOUT = 10
+    DEFAULT_TIMEOUT = 10.0
     DEFAULT_DELAY = 0.1
     DEFAULT_CLONE_MATCHER = false
 

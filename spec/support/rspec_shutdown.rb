@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Provides the with_rspec_shutting_down_in which safely toggles and reverts
+# the RSpec.world.wants_to_quit flag in order to simulate a developer
+# interrupting the RSpec suite with Ctrl-C.
 module RSpecShutdown
   def with_rspec_shutting_down_in(seconds)
     original_wants_to_quit = :unknown
