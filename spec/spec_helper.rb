@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "rspec/wait"
+require "rspec-wait"
 
 Dir[File.expand_path("support/**/*.rb", __dir__)].each { |file| require file }
 

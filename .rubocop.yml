@@ -18,6 +18,9 @@ Layout/LineEndStringConcatenationIndentation:
 Metrics:
   Enabled: false
 
+Naming/FileName:
+  Exclude:
+  - lib/rspec-wait.rb
 Naming/RescuedExceptionsVariableName:
   Enabled: false
 
