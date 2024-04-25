@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "timeout"
-
 module RSpec
   module Wait
     # The RSpec::Wait::Handler module is common functionality shared between
