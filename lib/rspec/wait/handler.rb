@@ -20,6 +20,8 @@ module RSpec
             super(target.call, matcher, message, &block)
           end
         rescue RSpec::Expectations::ExpectationNotMetError
+          raise if RSpec.world.wants_to_quit
+
           elapsed_time = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
           raise if elapsed_time > RSpec.configuration.wait_timeout
 

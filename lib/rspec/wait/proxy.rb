@@ -10,12 +10,13 @@ module RSpec
     #   wait(3.seconds).for { this }.to eq(that)
     #
     class Proxy
-      def initialize(options = {})
+      def initialize(**options)
         @options = options
       end
 
       def for(*args, &block)
         raise ArgumentError, "The `wait.for` method only accepts a block." if args.any?
+        raise ArgumentError, "The `wait.for` method requires a block." unless block
 
         Target.new(block, @options)
       end

@@ -35,7 +35,7 @@ module RSpec
       private
 
       def with_wait(&block)
-        Wait.with_wait(@wait_options, &block)
+        Wait.with_wait(**@wait_options, &block)
       end
     end
   end

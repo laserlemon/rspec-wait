@@ -20,6 +20,7 @@ module RSpec
     # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/syntax.rb#L72-L74
     def wait_for(*args, &block)
       raise ArgumentError, "The `wait_for` method only accepts a block." if args.any?
+      raise ArgumentError, "The `wait_for` method requires a block." unless block
 
       Target.new(block)
     end
@@ -28,14 +29,14 @@ module RSpec
       Proxy.new(timeout: timeout, delay: delay, clone_matcher: clone_matcher)
     end
 
-    def with_wait(options)
+    def with_wait(timeout: nil, delay: nil, clone_matcher: nil)
       original_timeout = RSpec.configuration.wait_timeout
       original_delay = RSpec.configuration.wait_delay
       original_clone_matcher = RSpec.configuration.clone_wait_matcher
 
-      RSpec.configuration.wait_timeout = options[:timeout] if options[:timeout]
-      RSpec.configuration.wait_delay = options[:delay] if options[:delay]
-      RSpec.configuration.clone_wait_matcher = options[:clone_matcher] if options.key?(:clone_matcher)
+      RSpec.configuration.wait_timeout = timeout unless timeout.nil?
+      RSpec.configuration.wait_delay = delay unless delay.nil?
+      RSpec.configuration.clone_wait_matcher = clone_matcher unless clone_matcher.nil?
 
       yield
     ensure
@@ -55,6 +56,6 @@ RSpec.configure do |config|
 
   config.around(wait: {}) do |example|
     options = example.metadata.fetch(:wait)
-    with_wait(options) { example.run }
+    with_wait(**options) { example.run }
   end
 end

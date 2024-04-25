@@ -5,6 +5,7 @@
 RSpec::Matchers.define :eq_with_bad_memoization do |expected|
   match do |actual|
     @memo ||= actual
+    @actual = @memo
     @memo == expected
   end
 end
