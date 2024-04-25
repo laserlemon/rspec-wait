@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require "rspec"
-require "rspec/wait/handler"
-require "rspec/wait/proxy"
-require "rspec/wait/target"
-require "rspec/wait/version"
+
+require_relative "wait/handler"
+require_relative "wait/proxy"
+require_relative "wait/target"
+require_relative "wait/version"
 
 module RSpec
   # The RSpec::Wait module is included into RSpec's example environment, making
