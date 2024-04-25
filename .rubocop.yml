@@ -1,23 +1,51 @@
-# This should always correspond to the earliest non-EOL Ruby version.
-AllCops:
-  TargetRubyVersion: 2.2
+require:
+- rubocop-md
+- rubocop-performance
+- rubocop-rake
+- rubocop-rspec
 
-# TODO: Re-enable this cop after TomDoc code deocumentation is added.
-Style/Documentation:
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.0
+
+Gemspec/DevelopmentDependencies:
   Enabled: false
 
-Metrics/BlockLength:
-  ExcludedMethods:
-    - context
-    - describe
-Metrics/LineLength:
-  IgnoreCopDirectives: true
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+Layout/LineEndStringConcatenationIndentation:
+  EnforcedStyle: indented
+
+Metrics:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+  - lib/rspec-wait.rb
+  - "*.md"
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
+
+RSpec/BeEq:
+  Enabled: false
+RSpec/DescribeClass:
+  Enabled: false
+RSpec/DescribedClass:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+
 Style/BlockDelimiters:
-  EnforcedStyle: semantic
-  FunctionalMethods:
-    - expect
-    - let
+  EnforcedStyle: braces_for_chaining
+Style/IfUnlessModifier:
+  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
-  EnforcedStyle: brackets
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

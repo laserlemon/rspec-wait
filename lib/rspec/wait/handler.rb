@@ -1,31 +1,42 @@
-require "timeout"
+# frozen_string_literal: true
 
 module RSpec
   module Wait
+    # The RSpec::Wait::Handler module is common functionality shared between
+    # the RSpec::Wait::PositiveHandler and RSpec::Wait::NegativeHandler classes
+    # defined below. The module overrides RSpec's handle_matcher method,
+    # allowing a block target to be repeatedly evaluated until the underlying
+    # matcher passes or the configured timeout elapses.
     module Handler
-      def handle_matcher(target, *args, &block) # rubocop:disable Metrics/MethodLength
-        failure = nil
+      def handle_matcher(target, initial_matcher, message, &block)
+        start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
-        Timeout.timeout(RSpec.configuration.wait_timeout) do
-          begin
-            actual = target.respond_to?(:call) ? target.call : target
-            super(actual, *args, &block)
-          rescue RSpec::Expectations::ExpectationNotMetError => failure
-            sleep RSpec.configuration.wait_delay
-            retry
+        begin
+          matcher = RSpec.configuration.clone_wait_matcher ? initial_matcher.clone : initial_matcher
+
+          if matcher.supports_block_expectations?
+            super(target, matcher, message, &block)
+          else
+            super(target.call, matcher, message, &block)
           end
+        rescue RSpec::Expectations::ExpectationNotMetError
+          raise if RSpec.world.wants_to_quit
+
+          elapsed_time = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
+          raise if elapsed_time > RSpec.configuration.wait_timeout
+
+          sleep RSpec.configuration.wait_delay
+          retry
         end
-      rescue Timeout::Error
-        raise failure || TimeoutError
       end
     end
 
-    # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/handler.rb#L44-L63
+    # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/handler.rb#L46-L65
     class PositiveHandler < RSpec::Expectations::PositiveExpectationHandler
       extend Handler
     end
 
-    # From: https://github.com/rspec/rspec-expectations/blob/v3.0.0/lib/rspec/expectations/handler.rb#L66-L93
+    # From: https://github.com/rspec/rspec-expectations/blob/v3.4.0/lib/rspec/expectations/handler.rb#L68-L95
     class NegativeHandler < RSpec::Expectations::NegativeExpectationHandler
       extend Handler
     end

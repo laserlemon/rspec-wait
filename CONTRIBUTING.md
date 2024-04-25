@@ -21,16 +21,6 @@ For the best chance of having your changes merged, please:
 4. [Submit](https://github.com/laserlemon/rspec-wait/pulls) a pull request with *at least* one animated GIF.
 5. Be patient.
 
-If your proposed changes only affect documentation, include the following on a
-new line in each of your commit messages:
-
-```
-[ci skip]
-```
-
-This will signal [Travis](https://travis-ci.org) that running the test suite is
-not necessary for these changes.
-
 ## Bug Reports
 
 If you are experiencing unexpected behavior and, after having read RSpec::Wait's

@@ -1,9 +1,7 @@
+# frozen_string_literal: true
+
 module RSpec
   module Wait
-    VERSION = ::Gem::Version.new("0.0.10")
-
-    def self.version
-      VERSION
-    end
+    VERSION = ::Gem::Version.new("1.0.0.rc1")
   end
 end
