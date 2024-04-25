@@ -1,4 +1,5 @@
 require:
+- rubocop-md
 - rubocop-performance
 - rubocop-rake
 - rubocop-rspec
@@ -21,6 +22,7 @@ Metrics:
 Naming/FileName:
   Exclude:
   - lib/rspec-wait.rb
+  - "*.md"
 Naming/RescuedExceptionsVariableName:
   Enabled: false
 
