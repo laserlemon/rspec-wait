@@ -6,6 +6,16 @@ Wait for conditions in RSpec
 [![Build Status](https://img.shields.io/github/actions/workflow/status/laserlemon/rspec-wait/rake.yml)](https://github.com/laserlemon/rspec-wait/actions/workflows/rake.yml)
 [![License](https://img.shields.io/github/license/laserlemon/rspec-wait)](https://github.com/laserlemon/rspec-wait/blob/-/LICENSE.txt)
 
+## ⭐ RSpec::Wait `1.0.0.rc1` is released!
+
+You can help by [upgrading](https://github.com/laserlemon/rspec-wait?tab=readme-ov-file#upgrading-from-v0)!
+
+```ruby
+gem "rspec-wait", "1.0.0.rc1"
+```
+
+If you have any trouble upgrading or working with RSpec::Wait v1, please [open an issue](https://github.com/laserlemon/rspec-wait/issues/new). Otherwise, no news is good news and version `1.0.0` will be released on May 31, 2024.
+
 ## Why does RSpec::Wait exist?
 
 Timing is hard.
