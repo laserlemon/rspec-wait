@@ -34,4 +34,9 @@ Gem::Specification.new do |spec|
   ])
 
   spec.extra_rdoc_files = ["README.md"]
+
+  spec.post_install_message = <<-MSG
+[rspec-wait] RSpec::Wait 1.0 has arrived! Please upgrade for the latest and greatest.
+[rspec-wait] See what's changed here: https://github.com/laserlemon/rspec-wait/blob/-/CHANGELOG.md
+  MSG
 end
