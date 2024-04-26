@@ -1,0 +1,38 @@
+name: Rake
+on:
+  push:
+    branches:
+    - v0
+  pull_request:
+    branches:
+    - v0
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version:
+        - "2.2"
+        - "2.3"
+        - "2.4"
+        gemfile-path:
+        - gemfiles/rspec_3_0.gemfile
+        - gemfiles/rspec_3_1.gemfile
+        - gemfiles/rspec_3_2.gemfile
+        - gemfiles/rspec_3_3.gemfile
+        - gemfiles/rspec_3_4.gemfile
+        - gemfiles/rspec_3_5.gemfile
+        - gemfiles/rspec_3_6.gemfile
+        - gemfiles/rspec_3_7.gemfile
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.gemfile-path }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    - name: Run tests
+      run: bundle exec rake

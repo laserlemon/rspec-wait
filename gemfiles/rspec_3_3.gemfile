@@ -2,9 +2,5 @@ source "https://rubygems.org"
 
 gemspec path: ".."
 
+gem "rake", "< 11" # See: https://github.com/rspec/rspec-core/pull/2197
 gem "rspec", "~> 3.3.0"
-
-group :test do
-  gem "codeclimate-test-reporter", require: false
-  gem "rake", "< 11" # See: https://github.com/rspec/rspec-core/pull/2197
-end
