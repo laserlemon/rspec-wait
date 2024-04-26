@@ -1,3 +1,14 @@
+## 0.0.10 / 2024-04-26
+
+* [DEPRECATION] Passing an argument to wait_for or wait.for (should pass a block)
+* [ENHANCEMENT] Added RuboCop for consistent code style
+
+## 0.0.9 / 2016-07-11
+
+* [ENHANCEMENT] Remove support for Ruby versions 1.9 and 2.0
+* [ENHANCEMENT] Remove support for all RSpec 2.x versions
+* [ENHANCEMENT] Add support for RSpec 3.5
+
 ## 0.0.8 / 2015-11-14
 
 * [ENHANCEMENT] Add support for RSpec 3.4
