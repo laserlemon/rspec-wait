@@ -9,5 +9,5 @@ rescue LoadError
   task default: [:spec]
 else
   RuboCop::RakeTask.new(:rubocop)
-  task default: [:spec, :rubocop]
+  task default: [:rubocop, :spec]
 end
