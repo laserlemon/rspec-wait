@@ -3,7 +3,7 @@ require "timeout"
 module RSpec
   module Wait
     module Handler
-      def handle_matcher(target, *args, &block) # rubocop:disable Metrics/MethodLength
+      def handle_matcher(target, *args, &block)
         failure = nil
 
         Timeout.timeout(RSpec.configuration.wait_timeout) do

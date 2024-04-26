@@ -1,23 +1,31 @@
-# This should always correspond to the earliest non-EOL Ruby version.
 AllCops:
+  NewCops: disable
+  SuggestExtensions: false
   TargetRubyVersion: 2.2
 
-# TODO: Re-enable this cop after TomDoc code deocumentation is added.
-Style/Documentation:
+Gemspec/DevelopmentDependencies:
   Enabled: false
 
-Metrics/BlockLength:
-  ExcludedMethods:
-    - context
-    - describe
-Metrics/LineLength:
-  IgnoreCopDirectives: true
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+Layout/LineEndStringConcatenationIndentation:
+  EnforcedStyle: indented
+
+Metrics:
+  Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
+
 Style/BlockDelimiters:
-  EnforcedStyle: semantic
-  FunctionalMethods:
-    - expect
-    - let
+  EnforcedStyle: braces_for_chaining
+Style/Documentation:
+  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
   EnforcedStyle: brackets
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
