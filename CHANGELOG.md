@@ -32,6 +32,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Passing an argument to wait_for or wait.for (must pass a block)
 - RSpec::Wait::TimeoutError in favor of RSpec failure
 
+## [0.0.10] - 2024-04-26
+
+### Changed
+
+- Added RuboCop for consistent code style
+
+### Deprecated
+
+- Passing an argument to wait_for or wait.for (should pass a block)
+
 ## [0.0.9] - 2016-07-11
 
 ### Added
@@ -41,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Support for Ruby versions 1.9 and 2.0
+- Support for all RSpec 2.x versions
 
 ## [0.0.8] - 2015-11-14
 
@@ -94,6 +105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [unreleased]: https://github.com/laserlemon/rspec-wait/compare/v1.0.0.rc1...HEAD
 [1.0.0.rc1]: https://github.com/laserlemon/rspec-wait/compare/v0.0.9...v1.0.0.rc1
+[0.0.10]: https://github.com/laserlemon/rspec-wait/compare/v0.0.9...v0.0.10
 [0.0.9]: https://github.com/laserlemon/rspec-wait/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/laserlemon/rspec-wait/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/laserlemon/rspec-wait/compare/v0.0.6...v0.0.7
