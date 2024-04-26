@@ -133,6 +133,19 @@ environment:
 require "rspec/wait"
 ```
 
+### Upgrading from v0
+
+RSpec::Wait v1 is very similar in syntax to v0 but does have a few breaking
+changes that you should be aware of when upgrading from any 0.x version:
+
+1. RSpec::Wait v1 requires Ruby 3.0 or greater and RSpec 3.4 or greater.
+2. The `wait_for` and `wait.for` methods no longer accept arguments, only
+   blocks.
+3. RSpec::Wait no longer uses Ruby's problematic `Timeout.timeout` method,
+   which means it will no longer raise a `RSpec::Wait::TimeoutError`.
+   RSpec::Wait v1 never interrupts the block given to `wait_for` mid-call
+   so make every effort to reasonably limit the block's individual call time.
+
 ## Configuration
 
 RSpec::Wait has three available configuration values:
