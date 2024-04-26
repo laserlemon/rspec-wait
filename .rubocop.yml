@@ -13,8 +13,6 @@ Gemspec/DevelopmentDependencies:
 
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
-Layout/LineEndStringConcatenationIndentation:
-  EnforcedStyle: indented
 
 Metrics:
   Enabled: false
@@ -23,14 +21,10 @@ Naming/FileName:
   Exclude:
   - lib/rspec-wait.rb
   - "*.md"
-Naming/RescuedExceptionsVariableName:
-  Enabled: false
 
 RSpec/BeEq:
   Enabled: false
 RSpec/DescribeClass:
-  Enabled: false
-RSpec/DescribedClass:
   Enabled: false
 RSpec/ExampleLength:
   Enabled: false
@@ -39,12 +33,10 @@ RSpec/MultipleExpectations:
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
-Style/IfUnlessModifier:
-  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
-  Enabled: false
+  EnforcedStyle: brackets
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
 Style/TrailingCommaInHashLiteral:
