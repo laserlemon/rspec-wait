@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2024-05-31
+
+Promoted version 1.0.0.rc1 to 1.0.0.
+
 ## [1.0.0.rc1] - 2024-04-25
 
 ### Added
@@ -103,7 +107,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release!
 
-[unreleased]: https://github.com/laserlemon/rspec-wait/compare/v1.0.0.rc1...HEAD
+[unreleased]: https://github.com/laserlemon/rspec-wait/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/laserlemon/rspec-wait/compare/v1.0.0.rc1...v1.0.0
 [1.0.0.rc1]: https://github.com/laserlemon/rspec-wait/compare/v0.0.9...v1.0.0.rc1
 [0.0.10]: https://github.com/laserlemon/rspec-wait/compare/v0.0.9...v0.0.10
 [0.0.9]: https://github.com/laserlemon/rspec-wait/compare/v0.0.8...v0.0.9
