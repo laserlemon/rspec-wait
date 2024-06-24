@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2024-06-24
+
 ### Fixed
 
 - Fix support for non-block matchers that don't define `#supports_block_expectations?`
@@ -111,7 +113,8 @@ Promoted version 1.0.0.rc1 to 1.0.0.
 
 - Initial release!
 
-[unreleased]: https://github.com/laserlemon/rspec-wait/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/laserlemon/rspec-wait/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/laserlemon/rspec-wait/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/laserlemon/rspec-wait/compare/v1.0.0.rc1...v1.0.0
 [1.0.0.rc1]: https://github.com/laserlemon/rspec-wait/compare/v0.0.9...v1.0.0.rc1
 [0.0.10]: https://github.com/laserlemon/rspec-wait/compare/v0.0.9...v0.0.10
