@@ -14,7 +14,7 @@ module RSpec
         begin
           matcher = RSpec.configuration.clone_wait_matcher ? initial_matcher.clone : initial_matcher
 
-          if matcher.supports_block_expectations?
+          if matcher.respond_to?(:supports_block_expectations?) && matcher.supports_block_expectations?
             super(target, matcher, message, &block)
           else
             super(target.call, matcher, message, &block)

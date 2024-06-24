@@ -121,6 +121,15 @@ RSpec.shared_examples "wait_for" do
       end
     end
 
+    it "works with non-block matchers that don't define #supports_block_expectations?" do
+      matcher = eq(".")
+      matcher.singleton_class.undef_method(:supports_block_expectations?)
+
+      expect_pass do
+        target { ticker.tape }.to matcher
+      end
+    end
+
     it "reuses the given matcher instance by default" do
       expect_fail do
         target { ticker.tape }.to eq_with_bad_memoization(".")
@@ -247,6 +256,15 @@ RSpec.shared_examples "wait_for" do
     it "waits for a block matcher when the expectation is not met" do
       expect_fail do
         target { raise StandardError, "boom" }.not_to raise_error
+      end
+    end
+
+    it "works with non-block matchers that don't define #supports_block_expectations?" do
+      matcher = eq("")
+      matcher.singleton_class.undef_method(:supports_block_expectations?)
+
+      expect_pass do
+        target { ticker.tape }.not_to matcher
       end
     end
   end

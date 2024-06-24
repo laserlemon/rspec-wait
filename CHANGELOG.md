@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix support for non-block matchers that don't define `#supports_block_expectations?`
+
 ## [1.0.0] - 2024-05-31
 
 Promoted version 1.0.0.rc1 to 1.0.0.
