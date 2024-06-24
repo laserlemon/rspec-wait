@@ -181,7 +181,7 @@ per-context basis using `wait` metadata. Provide a hash containing any
 number of shorthand keys and values for RSpec::Wait's configurations.
 
 ```ruby
-scenario "A user can log in successfully", wait: { timeout: 3, delay: 0.5, clone_wait_matcher: true } do
+scenario "A user can log in successfully", wait: { timeout: 3, delay: 0.5, clone_matcher: true } do
   visit new_session_path
 
   fill_in "Email", with: "john@example.com"
