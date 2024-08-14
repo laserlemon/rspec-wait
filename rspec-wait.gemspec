@@ -4,7 +4,7 @@ require_relative "lib/rspec/wait/version"
 
 Gem::Specification.new do |spec|
   spec.name = "rspec-wait"
-  spec.summary = "Wait for conditions in RSpec"
+  spec.summary = "Time-resilient expectations in RSpec"
   spec.description = "RSpec::Wait enables time-resilient expectations in your RSpec test suite."
   spec.version = RSpec::Wait::VERSION
 
