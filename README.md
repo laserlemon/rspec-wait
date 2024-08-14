@@ -1,6 +1,6 @@
 # RSpec::Wait
 
-Time-resilient assertions in RSpec
+Time-resilient expectations in RSpec
 
 [![Gem Version](https://img.shields.io/gem/v/rspec-wait)](http://rubygems.org/gems/rspec-wait)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/laserlemon/rspec-wait/rake.yml)](https://github.com/laserlemon/rspec-wait/actions/workflows/rake.yml)
