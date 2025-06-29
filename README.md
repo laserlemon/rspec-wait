@@ -2,9 +2,10 @@
 
 Time-resilient expectations in RSpec
 
-[![Gem Version](https://img.shields.io/gem/v/rspec-wait)](http://rubygems.org/gems/rspec-wait)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/laserlemon/rspec-wait/rake.yml)](https://github.com/laserlemon/rspec-wait/actions/workflows/rake.yml)
-[![License](https://img.shields.io/github/license/laserlemon/rspec-wait)](https://github.com/laserlemon/rspec-wait/blob/-/LICENSE.txt)
+[![Made by laserlemon](https://img.shields.io/badge/laser-lemon-fc0?style=flat-square)](https://github.com/laserlemon)
+[![Gem version](https://img.shields.io/gem/v/rspec-wait?style=flat-square)](https://rubygems.org/gems/rspec-wait)
+[![Build status](https://img.shields.io/github/actions/workflow/status/laserlemon/figaro/test.yml?style=flat-square)](https://github.com/laserlemon/figaro/actions/workflows/test.yml)
+
 
 ## Why does RSpec::Wait exist?
 
