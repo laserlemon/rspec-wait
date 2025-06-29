@@ -142,7 +142,7 @@ jobs:
       run: |
         ruby --version
         bundle list
-        rspec --version
-        rubocop --version
+        bundle exec rspec --version
+        bundle exec rubocop --version
     - name: Run Rake
       run: bundle exec rake
