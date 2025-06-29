@@ -1,0 +1,148 @@
+name: Test
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+  schedule:
+  - cron: "0 13 * * 1"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_4.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_4.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_4.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_4.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_4.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_5.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_5.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_5.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_5.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_5.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_6.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_6.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_6.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_6.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_6.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_7.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_7.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_7.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_7.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_7.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_8.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_8.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_8.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_8.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_8.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_9.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_9.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_9.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_9.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_9.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_10.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_10.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_10.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_10.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_10.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_11.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_11.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_11.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_11.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_11.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_12.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_12.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_12.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_12.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_12.gemfile
+        - ruby: "3.0"
+          gemfile: gemfiles/rspec_3_13.gemfile
+        - ruby: "3.1"
+          gemfile: gemfiles/rspec_3_13.gemfile
+        - ruby: "3.2"
+          gemfile: gemfiles/rspec_3_13.gemfile
+        - ruby: "3.3"
+          gemfile: gemfiles/rspec_3_13.gemfile
+        - ruby: "3.4"
+          gemfile: gemfiles/rspec_3_13.gemfile
+        - ruby: "3.0"
+          gemfile: Gemfile
+        - ruby: "3.1"
+          gemfile: Gemfile
+        - ruby: "3.2"
+          gemfile: Gemfile
+        - ruby: "3.3"
+          gemfile: Gemfile
+        - ruby: "3.4"
+          gemfile: Gemfile
+        - ruby: ruby
+          gemfile: Gemfile
+        - ruby: head
+          gemfile: Gemfile
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.gemfile }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - name: Print dependency versions
+      run: |
+        ruby --version
+        bundle list
+        rspec --version
+        rubocop --version
+    - name: Run Rake
+      run: bundle exec rake

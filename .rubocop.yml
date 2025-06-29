@@ -1,4 +1,4 @@
-require:
+plugins:
 - rubocop-md
 - rubocop-performance
 - rubocop-rake
@@ -27,6 +27,8 @@ RSpec/BeEq:
 RSpec/DescribeClass:
   Enabled: false
 RSpec/ExampleLength:
+  Enabled: false
+RSpec/IncludeExamples:
   Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
