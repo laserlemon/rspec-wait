@@ -1,8 +1,8 @@
 <h1>
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/c32e5e10-52b7-4fa3-8c5d-819d1ab0561f">
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/4213d2b7-fdb2-4be5-9fd0-328a273b2830">
-    <img alt="RSpec Wait" src="https://github.com/user-attachments/assets/c32e5e10-52b7-4fa3-8c5d-819d1ab0561f" style="height:2em">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/0a2a9311-ad40-4d8a-894c-acea2005d870">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/c632f303-cd99-465e-ad77-df62335c7e77">
+    <img alt="RSpec Wait" src="https://github.com/user-attachments/assets/0a2a9311-ad40-4d8a-894c-acea2005d870" style="height:2em">
   </picture>
 </h1>
 
