@@ -1,4 +1,10 @@
-# RSpec::Wait
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/c32e5e10-52b7-4fa3-8c5d-819d1ab0561f">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/4213d2b7-fdb2-4be5-9fd0-328a273b2830">
+    <img alt="RSpec Wait" src="https://github.com/user-attachments/assets/c32e5e10-52b7-4fa3-8c5d-819d1ab0561f" style="height:2em">
+  </picture>
+</h1>
 
 Time-resilient expectations in RSpec
 
