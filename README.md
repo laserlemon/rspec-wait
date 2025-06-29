@@ -4,7 +4,7 @@ Time-resilient expectations in RSpec
 
 [![Made by laserlemon](https://img.shields.io/badge/laser-lemon-fc0?style=flat-square)](https://github.com/laserlemon)
 [![Gem version](https://img.shields.io/gem/v/rspec-wait?style=flat-square)](https://rubygems.org/gems/rspec-wait)
-[![Build status](https://img.shields.io/github/actions/workflow/status/laserlemon/figaro/test.yml?style=flat-square)](https://github.com/laserlemon/figaro/actions/workflows/test.yml)
+[![Build status](https://img.shields.io/github/actions/workflow/status/laserlemon/rspec-wait/test.yml?style=flat-square)](https://github.com/laserlemon/rspec-wait/actions/workflows/test.yml)
 
 
 ## Why does RSpec::Wait exist?
